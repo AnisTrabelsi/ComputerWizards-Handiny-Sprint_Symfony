@@ -6,6 +6,7 @@
 parameters:
     images_directory: '%kernel.project_dir%/public/uploads'
     qr_directory: '%kernel.project_dir%/public/qr'
+    #    twilio_number: '%env(TWILIO_NUMBER)%'
 
     voiture_images_directory: '%kernel.project_dir%/public/front/images/voitures'
     image_directory: 'C:/xampp8.1/htdocs/handinyweb - Copie/public/front/images'
@@ -36,3 +37,8 @@ services:
 
 
     
+# twilio.client:
+#         class: Twilio\Rest\Client
+#         arguments: ['%env(TWILIO_ACCOUNT_SID)%', '%env(TWILIO_AUTH_TOKEN)%']
+
+# Twilio\Rest\Client: '@twilio.client'

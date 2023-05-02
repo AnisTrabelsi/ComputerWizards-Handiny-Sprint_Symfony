@@ -1,0 +1,107 @@
+{% extends "baseF.html.twig" %}
+{% block body%}
+	<htmllang="en" dir="ltr">
+		<!-- Mirrored from red-parts.html.themeforest.scompiler.ru/themes/red-ltr/account-edit-address.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 22:33:57 GMT -->
+
+		<body>
+			<!-- site -->
+			<div
+				class="site">
+
+
+				<!-- site__body -->
+				<div class="site__body">
+
+
+					<div class="block-space block-space--layout--after-header"></div>
+					<div class="block">
+						<div class="container container--max--xl">
+							<div class="row">
+								<div class="col-12 col-lg-3 d-flex">
+									<div class="account-nav flex-grow-1">
+										<h4 class="account-nav__title">Navigation</h4>
+										<ul class="account-nav__list">
+											<li class="account-nav__item">
+												<a href="{{path('app_add_user',{ 'id':app.user.id  })}}">Dashboard</a>
+											</li>
+											<li class="account-nav__item account-nav__item--active">
+												<a href="{{path('app_add_reclamation')}}">Ajouter une reclamation</a>
+											</li>
+											<li class="account-nav__item">
+												<a href="{{path('app_list_reclamation')}}">Mes reclamations</a>
+											</li>
+
+										</li>
+										<li class="account-nav__item">
+											<a href="{{path('app_update_user',{ 'id':app.user.id})}}">Modifier mon Profile</a>
+										</li>
+
+										<li class="account-nav__item">
+											<a href="{{path('app_forgot_password_request')}}">Mot de passe oublié
+											</a>
+										</li>
+										<li class="account-nav__divider" role="presentation"></li>
+										<li class="account-nav__item">
+											<a href="{{path('app_logout')}}">Logout</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+								<div class="card">
+									<div class="card-header">
+										<h5>Ajouter une reclamation</h5>
+
+									</div>
+									<div class="card-divider"></div>
+									<div class="card-body card-body--padding--2">
+										<div class="row no-gutters">
+											<div class="col-12 col-lg-10 col-xl-8">
+
+
+												{{ form_start(reclamationform,{'attr':{'novalidate':'novalidate'}}) }}
+
+												<div class="form-group">
+
+													{{ form_label(reclamationform.type_reclamation,"Type reclamation") }}
+													{{ form_widget(reclamationform.type_reclamation,{'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(reclamationform.type_reclamation) }}
+
+
+												</div>
+												<div class="form-group ">
+													{{ form_label(reclamationform.description,"Description") }}
+													{{ form_widget(reclamationform.description, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(reclamationform.description) }}
+												</div>
+
+
+												{{ form_widget(reclamationform.Save, {'attr': { 'class':'btn btn-primary mt-3'}}) }}
+												{{ form_end(reclamationform) }}
+
+
+												<div class="form-group mb-0 pt-3 mt-3"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block-space block-space--layout--before-footer"></div>
+				</body>
+			</html>
+
+		</body>
+		{% for type, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+        <script>
+            alertify.notify("{{ message }}", "{{ type }}");
+        </script>
+    {% endfor %}
+{% endfor %}
+
+
+	{% endblock %}
+	

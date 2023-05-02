@@ -1,0 +1,8 @@
+swiftmailer:
+    transport: smtp
+    host: 'localhost'
+    port: 587
+    encryption: tls
+    username: 'chayma.bensaad@esprit.tn'
+    password: '223JFT2127'
+    spool: { type: memory }

@@ -1,3 +1,16 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+app_insert_user:
+    path: /insert
+    controller: App\Controller\UserController::Add
+
+app_user_dashboard:
+    path: '/user/dashboard/{id}'
+    controller: App\Controller\UserController::Dashboard
+    methods: ['GET']
+
+app_user_authentification:
+    path: '/user/authentification'
+    controller: App\Controller\UserController::authentification
+    methods: 'GET'
+captcha:
+    path: /captcha/{key}
+    controller: Gregwar\CaptchaBundle\Controller\CaptchaController::generate

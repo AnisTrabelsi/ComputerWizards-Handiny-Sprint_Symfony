@@ -1,0 +1,186 @@
+{% extends 'baseB.html.twig' %}
+{% block body %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+	<div class="nk-content">
+		<div class="container">
+			<div class="nk-content-inner">
+				<div class="nk-content-body">
+					<div class="nk-block-head">
+						<div class="nk-block-head-between flex-wrap gap g-2">
+
+							<div class="nk-block-head-content"></div>
+						
+                        </div>
+					</div>
+					<div class="nk-block">
+						<h1 id="h11">Statistiques des utilisateurs</h1>
+						<br>
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6">
+									<h4 id="h11">Nombre des utilisateurs par genre</h4>
+									<canvas id="sexeChart" width="100" height="70"></canvas>
+								</div>
+								<div class="col-md-6">
+							<h4 id="h11">Nombre des utilisateurs par tranche d'age</h4>
+							<canvas id="ageChart" width="100" height="70"></canvas>
+						</div>
+                               
+							</div>
+						</div>
+						<style>
+							h2 {
+								background-color: #44ae60; /* Couleur de fond */
+								color: #F2F2F2; /* Couleur du texte */
+								padding: 10px 20px; /* Espacement intérieur */
+								border-radius: 10px; /* Bordure arrondie */
+								position: relative; /* Définir la position comme relative pour permettre l'animation */
+								animation-name: moveText; /* Nom de l'animation */
+								animation-duration: 2s; /* Durée de l'animation */
+								animation-timing-function: ease-in-out; /* Fonction de chronométrage de l'animation */
+								animation-iteration-count: infinite; /* Nombre d'itérations de l'animation (infini pour une animation continue) */
+							}
+							#container2 {
+
+								height: 100px;
+								width: 100px;
+							}
+							#container {
+								height: 400px;
+								width: 400px;
+							}
+							h1 {
+								text-align: center;
+							}
+
+							/* Ajoutez vos autres styles personnalisés ici */
+						</style>
+
+						<script>
+							// Récupérer les données passées depuis le contrôleur
+                                    var genre = {{ genre|raw }};
+                                    var nombre = {{ nombre|raw }};
+
+                                   
+
+
+                            // Définir un tableau de couleurs pour les marques et modèles
+                                    var colors = [
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 205, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.6)',
+                                    'rgba(153, 102, 255, 0.6)',
+                                    'rgba(255, 99, 132, 0.6)',
+                                    'rgba(255, 159, 64, 0.6)'
+                                    ];
+                                    // Créer le graphique pour les utilisateurs par sexe
+                                    new Chart(document.getElementById('sexeChart'), {
+                                    type: 'pie',
+                                    data: {
+                                    labels: genre,
+                                    datasets: [
+                                    {
+                                    data: nombre,
+                                    backgroundColor: colors.slice(0, genre.length),
+                                    borderColor: colors.slice(0, genre.length),
+                                    borderWidth: 1
+                                    }
+                                    ]
+                                    },
+                                    options: {
+                                    responsive: true
+                                    }
+                                    });
+
+						</script>
+
+
+					</div>
+					<div class="nk-block">
+						
+						
+						<style>
+							h2 {
+								background-color: #44ae60; /* Couleur de fond */
+								color: #F2F2F2; /* Couleur du texte */
+								padding: 10px 20px; /* Espacement intérieur */
+								border-radius: 10px; /* Bordure arrondie */
+								position: relative; /* Définir la position comme relative pour permettre l'animation */
+								animation-name: moveText; /* Nom de l'animation */
+								animation-duration: 2s; /* Durée de l'animation */
+								animation-timing-function: ease-in-out; /* Fonction de chronométrage de l'animation */
+								animation-iteration-count: infinite; /* Nombre d'itérations de l'animation (infini pour une animation continue) */
+							}
+							#container2 {
+
+								height: 100px;
+								width: 100px;
+							}
+							#container {
+								height: 400px;
+								width: 400px;
+							}
+							h1 {
+								text-align: center;
+							}
+
+							/* Ajoutez vos autres styles personnalisés ici */
+						</style>
+
+						<script>
+							// Récupérer les données passées depuis le contrôleur
+                                
+
+
+                            // Définir un tableau de couleurs pour les marques et modèles
+                                    var colors = [
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 205, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.6)',
+                                    'rgba(153, 102, 255, 0.6)',
+                                    'rgba(255, 99, 132, 0.6)',
+                                    'rgba(255, 159, 64, 0.6)'
+                                    ];
+                                    // Créer le graphique pour les utilisateurs par sexe
+                                  
+									var ageGroups = {{ age_groups | raw }};
+									var user_counts = {{ user_counts | raw }};
+
+                                    new Chart(document.getElementById('ageChart'), {
+                                    type: 'bar',
+                                    data: {
+                                    labels: ageGroups,
+                                    datasets: [
+                                    {
+                                    data: user_counts,
+                                    backgroundColor: colors.slice(0, ageGroups.length),
+                                    borderColor: colors.slice(0, ageGroups.length),
+                                    borderWidth: 1
+                                    }
+                                    ]
+                                    },
+                                    options: {
+
+                                    responsive: true
+                                    }
+                                    });
+
+						</script>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{% block stylesheets %}
+			<link rel="icon" type="image/png" href="{{asset('front/images/logoo.png')}}">
+		{% endblock %}
+
+		{% set primaryColor = '#41AF64' %}
+		{% set secondaryColor = '#104D62' %}</head>
+</html>
+<html>
+	<head>
+		<style>
+			/* Your CSS code here */
+			body {
+				font-family: Arial, sans-serif;
+				font-size: 14px;
+				color: #333;
+				background-color: #f2f2f2;
+				padding: 20px;
+			}
+			h1 {
+				text-align: center;
+
+				font-size: 26px;
+				color: #104D62;
+				margin-top: 0;
+			}
+			p {
+				margin: 10px 0;
+				font-size: 16px;
+				color: #104D62;
+			}
+			.welcome {
+				text-align: center;
+				font-style: italic;
+				font-size: 24px;
+				color: #41AF64;
+
+				margin-top: 20px;
+				margin-bottom: 10px;
+			}
+			.don-info {
+				background-color: #fff;
+				border: 1px solid #ddd;
+				padding: 10px;
+				border-radius: 5px;
+			}
+			
+			.lien {
+				font-size: 18px;
+				font-weight: bold;
+				color: #0f421f;
+
+			}
+			.footer {
+				font-size: 14px;
+				font-weight: bold;
+				color: #104D62;
+			}
+		</style>
+	</head>
+
+</html>
+</head>
+<body>
+<div class="container">
+	<div class="header">
+		<h1>
+			Handiny
+		</h1>
+
+
+		<div class="welcome">
+			<em>Bienvenue chez handiny</em>
+		</div>
+		<br>
+
+		<div class="content">
+			<p>Bonjour,</p>
+			<p>Vous avez oublié votre mot de passe? Pas de problème! Vous pouvez le réinitialiser en cliquant sur ce lien:</p>
+
+		</div>
+
+
+		<a class="lien" href="{{ url('app_reset_password', {token: resetToken.token}) }}">Réinitialiser mon mot de passe</a>
+		<p>Attention! Ce lien expire dans
+			{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+		<p>Bonne journée</p>
+	</div>
+	<div class="footer">
+		Ceci est un mail automatique, merci de ne pas y répondre.
+
+
+	</div>
+</body></body></html>

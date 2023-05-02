@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Handiny - Confirmation de compte</title>
+
+    <style>
+        /* Your CSS code here */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            color: #104D62;
+            margin-top: 0;
+        }
+        .welcome {
+				text-align: center;
+				font-style: italic;
+				font-size: 24px;
+                color: #41AF64;				
+				margin-top: 20px;
+				margin-bottom: 10px;
+			}
+            p {
+				margin: 10px 0;
+				font-size: 16px;
+                font-weight: bold;
+				color: #104D62;
+			}
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    
+        .lien {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0f421f;
+
+        }
+        .footer {
+            font-size: 12px;
+            font-weight: bold;
+            color: #104D62;
+        }
+    </style>
+</head>
+<body>
+
+	<h1>
+        Handiny
+    </h1>
+
+
+
+    <h2 class="welcome">Bienvenue chez handiny</h2>
+
+
+    <br>
+        <br>
+
+<div class="content">
+    <p>
+        Confirmez votre compte en cliquant sur ce lien:
+      
+        <a class="lien" href="{{ signedUrl|raw }}">Confirmez mon mail !</a>
+        <br>
+        <span>Attention ! Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.</span>
+    </p>
+<p >Bonne journée!</p>
+</div>
+<div class="footer">
+
+	<p>Ceci est un mail automatique, merci de ne pas y répondre.</p>
+
+	
+</div>
+</body>
+</html>

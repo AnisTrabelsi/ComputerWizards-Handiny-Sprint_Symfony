@@ -1,0 +1,146 @@
+{% extends "baseF.html.twig" %}
+{% block body
+
+ %}
+	<html
+		lang="en" dir="ltr">
+		<!-- Mirrored from red-parts.html.themeforest.scompiler.ru/themes/red-ltr/account-order-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 22:33:57 GMT -->
+
+
+		
+			<!-- site -->
+			<div
+				class="site">
+
+
+				<!-- site__body -->
+				<div class="site__body">
+					<div class="block-space block-space--layout--after-header"></div>
+					<div class="block">
+						<div class="container container--max--xl">
+							<div class="row">
+								<div class="col-15 col-lg-3 d-flex">
+									<div class="account-nav flex-grow-1">
+										<h4 class="account-nav__title">Navigation</h4>
+										<ul class="account-nav__list">
+											
+											<li class="account-nav__item">
+												<a href="{{path('app_add_reclamation')}}">Ajouter une reclamation</a>
+											</li>
+											<li class="account-nav__item">
+												<a href="{{path('app_update_user',{ 'id':app.user.id })}}">Modifier mon profil</a>
+											</li>
+											<li class="account-nav__item">
+												<a href="{{path('app_list_reclamation')}}">Mes reclamations</a>
+											</li>
+											<li class="account-nav__item account-nav__item--active">
+												<a href="{{path('app_update_reclamation',{ 'id':app.user.id })}}">Modifier reclamation</a>
+											</li>
+											<li class="account-nav__divider" role="presentation"></li>
+											<li class="account-nav__item">
+												<a href="{{path('app_logout')}}">Logout</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								
+									<div class="col-15 col-lg-18 mt-8 mt-lg-0">
+										<div class="col-15 col-lg-18 mt-4 mt-lg-0">
+											<div class="card">
+												{{ form_start(reclamationform,{'attr':{'novalidate':'novalidate'}}) }}
+
+												<div class="card-header">
+													<h5>Modifier une reclamation</h5>
+												</div>
+
+												<div class="order-header">
+													<div class="order-header__actions">
+														<a href="/reclamation/list" class="btn btn-xs btn-secondary">Retour a la liste</a>
+													</div>
+													<h5 class="order-header__title">{{ reclamation.getTypeReclamation() }}</h5>
+
+												</div>
+												<div class="card-divider"></div>
+												<div class="card-table">
+													<div class="table-responsive-sm">
+														<table>
+															<thead>
+																<tr>
+																	<th>Description</th>
+
+																</tr>
+															</thead>
+															<tbody class="card-table__body card-table__body--merge-rows">
+																<tr>
+																	<td contenteditable="true" onclick="activateDescriptionEdit(event)">
+																		{{ form_label(reclamationform.description,"Description") }}
+																		{{ form_widget(reclamationform.description, {'attr': {'class': 'form-control'}}) }}
+																		{{ form_errors(reclamationform.description) }}
+																	</td>
+
+																</tr>
+															</tbody>
+															<tbody class="card-table__body card-table__body--merge-rows">
+																<tr>
+																	<th>Etat de votre reclamation
+																	</th>
+
+																</tr>
+																<tr>
+
+																	<td>{{ reclamation.getEtatReclamation()}}</td>
+																</tr>
+
+															</tbody>
+															<tfoot>
+																<tr>
+																	<th>Reponse a votre reclamation
+																	</th>
+
+																</tr>
+																<tr>
+
+																	<td>{{ reclamation.getReponse()}}</td>
+																</tr>
+															</tfoot>
+														</table>
+
+													</div>
+
+												</div>
+												<div class="form-group mb-0 pt-3 mt-3">
+													{{ form_widget(reclamationform.Update, {'attr': {'class': 'btn btn-primary'}}) }}
+												</div>
+
+
+												<script>
+													function activateDescriptionEdit(event) {
+														event.target.focus();
+													}
+												</script>
+												
+
+												{{ form_end(reclamationform) }}
+
+											</div>
+										</div>
+										<div class="block-space block-space--layout--before-footer"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+								
+
+
+							
+									
+
+						
+
+					
+{% endblock %}

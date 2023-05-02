@@ -1,0 +1,140 @@
+{% extends "baseB.html.twig" %}
+{% block body
+
+ %}
+
+	<br>
+	<br>
+
+	<body class="nk-body" data-sidebar-collapse="lg" data-navbar-collapse="lg">
+		{{ form_start(reclamationform,{'attr':{'novalidate':'novalidate'}}) }}
+		<div class="nk-app-root">
+			<div class="nk-main">
+
+				<div class="nk-wrap">
+
+					<div class="nk-content">
+						<div class="container">
+							<div class="nk-content-inner">
+								<div class="nk-content-body">
+									<div class="nk-block-head">
+										<div class="nk-block-head-between flex-wrap gap g-2">
+											<div class="nk-block-head-content">
+												<h2 class="nk-block-title">Cette reclamtion concerne le
+													{{reclamation.getTypeReclamation() }}
+
+												</h1>
+												<nav>
+
+
+													<ol class="breadcrumb breadcrumb-arrow mb-0">
+														<li class="breadcrumb-item">
+															<a href="#">Home</a>
+														</li>
+														<li class="breadcrumb-item">
+															<a href="#">ecommerce</a>
+														</li>
+														<li class="breadcrumb-item active" aria-current="page">
+															Repondre aux reclamations</li>
+													</ol>
+												</nav>
+											</div>
+											<div class="nk-block-head-content">
+												<ul class="d-flex">
+													<li>
+														<a href="https://html.nioboard.themenio.com/ecommerce/products.html" class="btn btn-primary btn-md d-md-none">
+															<em class="icon ni ni-eye"></em>
+															<span>View</span>
+														</a>
+													</li>
+													<li>
+														<a href="{{ path('app_list_reclam_type') }}" class="btn btn-primary d-none d-md-inline-flex">
+															<em class="icon ni ni-eye"></em>
+															<span>Liste des reclamations</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="nk-block">
+										<form action="#">
+											<div class="row g-gs">
+												<div class="col-xxl-9">
+													<div class="gap gy-4">
+														<div class="gap-col">
+															<div class="card card-gutter-md">
+																<div class="card-body">
+																	<div class="row g-gs">
+																		<div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                    <label class="form-label" style="font-weight:bold; font-size:20px; color:mauve;">Email de l'utilisateur</label>
+                                                                    <div class="form-control">
+                                                                    <tr>
+                                                                        <td>{{ reclamation.IdUtilisateur.email}}</td>
+                                                                    </tr>
+                                                                </div>
+                                                                </div>
+																		</div>
+																		<div class="form-group">
+                                                                    <label class="form-label" style="font-weight:bold; font-size:20px; color:mauve">Description de la reclamation</label>
+                                                                    <div class="form-control">
+																				<tr>
+																					<td>{{ reclamation.getDescription()}}</td>
+																				</tr>
+																			</div>
+                                                                            <br>
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<div class="form-control-wrap">
+																				<td contenteditable="true" onclick="activateDescriptionEdit(event)">
+                                                                           			 <label class="form-label" style="font-weight:bold; font-size:20px; color:mauve;">Etat de la reclamation</label>
+
+																						{{ form_widget(reclamationform.etat_reclamation, {'attr': {'class': 'form-control'}}) }}
+																						{{ form_errors(reclamationform.etat_reclamation) }}
+																				</td>
+                                                                                <br>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<div class="form-control-wrap">
+																				<td contenteditable="true" onclick="activateDescriptionEdit(event)">
+                                                                            <label class="form-label" style="font-weight:bold; font-size:20px; color:mauve;">Reponse a la reclamation</label>
+
+																					{{ form_widget(reclamationform.reponse, {'attr': {'class': 'form-control'}}) }}
+																					{{ form_errors(reclamationform.reponse) }}
+																				</td>
+                                                                                <br>
+																			</div>
+																		</div>
+																	</div>
+                                                                    <div class="d-flex justify-content-center">
+                                                                    {{ form_widget(reclamationform.Update, {'attr': {'class': 'btn btn-lg btn-primary w-20 text-center'}}) }}
+                                                                </div>
+
+																</div>
+
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+										</div>
+
+									</div>
+									{{ form_end(reclamationform) }}
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{% endblock %}

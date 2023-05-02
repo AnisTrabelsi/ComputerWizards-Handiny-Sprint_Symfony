@@ -1,0 +1,140 @@
+{% extends "baseF.html.twig" %}
+{% block body %}
+<html>
+	<!-- Mirrored from red-parts.html.themeforest.scompiler.ru/themes/red-ltr/account-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 22:33:57 GMT -->
+
+
+	<body>
+		<!-- site -->
+		<div
+			class="site">
+
+			<!-- site__body -->
+			<div class="site__body">
+				<div class="block-space block-space--layout--after-header"></div>
+				<div class="block">
+					<div class="container container--max--xl">
+						<div class="row">
+							<div class="col-12 col-lg-3 d-flex">
+								<div class="account-nav flex-grow-1">
+									<h4 class="account-nav__title">Navigation</h4>
+									<ul class="account-nav__list">
+										
+										<li class="account-nav__item">
+											<a href="{{path('app_add_reclamation')}}">Ajouter une reclamation</a>
+										</li>
+										<li class="account-nav__item">
+											<a href="{{path('app_list_reclamation')}}">Mes reclamations</a>
+										</li>
+										<li class="account-nav__item">
+									       <a href="{{path('app_update_user',{ 'id': 31 })}}">Modifier mon Profile</a>
+								        </li>
+
+
+										<li class="account-nav__item">
+											<a href="{{path('app_mdp_user')}}">Mot de passe oublié </a>
+										</li>
+										<li class="account-nav__divider" role="presentation"></li>
+										<li class="account-nav__item">
+											<a href="{{path('app_login')}}">Logout</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+								<div class="dashboard">
+									<div class="dashboard__profile card profile-card">
+										<div class="card-body profile-card__body">
+											<div class="profile-card__avatar">
+												<img src="images/avatars/user.png" alt="avatar">
+											</div>
+											<div class="profile-card__name">{{user.nom}}
+												{{user.prenom}}</div>
+											<div class="profile-card__email">{{user.Email}}< /div>
+											<div class="profile-card__edit">
+												<a href="{{path('app_update_user',{ 'id':31})}}" class="btn btn-secondary btn-sm">Modifier mon profil
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="dashboard__address card address-card address-card--featured">
+										<div class="address-card__badge tag-badge tag-badge--theme">Default</div>
+										<div class="address-card__body">
+											<div class="address-card__name">{{user.nom}}
+												{{user.prenom}}</div>
+											<div class="address-card__row">
+												Random Federation<br>
+												115302, Moscow<br>ul. Varshavskaya, 15-2-178
+											</div>
+											<div class="address-card__row">
+												<div class="address-card__row-title">Numero de telephone</div>
+												<div class="address-card__row-content">{{user.telephone}}</div>
+											</div>
+											<div class="address-card__row">
+												<div class="address-card__row-title">Email Address</div>
+												<div class="address-card__row-content">{{user.Email}}</div>
+											</div>
+											<div class="address-card__footer">
+												<a href="#">Edit Address</a>
+											</div>
+										</div>
+									</div>
+									<div class="dashboard__orders card">
+										<div class="card-header">
+											<h5>Recent Orders</h5>
+										</div>
+										<div class="card-divider"></div>
+										<div class="card-table">
+											<div class="table-responsive-sm">
+												<table>
+													<thead>
+														<tr>
+															<th>Order</th>
+															<th>Date</th>
+															<th>Status</th>
+															<th>Total</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+																<a href="account-order-details.html">#8132</a>
+															</td>
+															<td>02 April, 2019</td>
+															<td>Pending</td>
+															<td>$2,719.00 for 5 item(s)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="account-order-details.html">#7592</a>
+															</td>
+															<td>28 March, 2019</td>
+															<td>Pending</td>
+															<td>$374.00 for 3 item(s)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="account-order-details.html">#7192</a>
+															</td>
+															<td>15 March, 2019</td>
+															<td>Shipped</td>
+															<td>$791.00 for 4 item(s)</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block-space block-space--layout--before-footer"></div>
+			</div>
+			<!-- site__body / end -->
+		</body>
+	</body>
+</html>
+{% endblock %}
+

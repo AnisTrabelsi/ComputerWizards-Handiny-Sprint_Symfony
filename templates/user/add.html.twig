@@ -1,0 +1,274 @@
+{% extends "baseF.html.twig" %}
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		/* Styling for the form title */
+		h1 {
+			font-size: 3rem;
+			margin: 2rem auto 1rem;
+			text-align: center;
+			color: #333;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+		}
+		/* Styling for the form container */
+		.form-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			background-color: #f4f4f4;
+			height: 100vh;
+		}
+		/* Styling for the form itself */
+		.form-horizontal {
+			width: 100%;
+			max-width: 500px;
+			padding: 2rem;
+			background-color: white;
+			border-radius: 8px;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+			margin: 0 auto;
+		}
+		/* Styling for the form inputs */
+		.form-control {
+			padding: 0.5rem 0.75rem;
+			border-radius: 0.25rem;
+			border: 1px solid #ced4da;
+			font-size: 1rem;
+			margin-bottom: 1rem;
+		}
+		/* Styling for the form labels */
+		.control-label {
+			font-size: 1rem;
+			font-weight: 600;
+			margin-bottom: 0.5rem;
+		}
+		/* Styling for the form buttons */
+		.btn-container {
+			display: flex;
+			justify-content: center;
+		}
+		.btn {
+			padding: 0.5rem 1rem;
+			border-radius: 0.25rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+		}
+		.btn-primary {
+			color: white;
+			background-color: #red;
+			border-color: #red;
+		}
+		.btn-primary:hover {
+			background-color: #black;
+		}
+		.form {
+			margin: auto;
+			width: 50%;
+			border: 1px solid black;
+			padding: 10px;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+		.label {
+			display: block;
+			width: 50%;
+			padding: 5px;
+		}
+		.input[type=text],
+		input[type=email],
+		textarea {
+			width: 100%;
+			padding: 5px;
+			margin-bottom: 10px;
+			box-sizing: border-box;
+		}
+		.input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+		.input[type=submit]:hover {
+			background-color: #45a049;
+		}
+
+
+
+
+		.has-error input,
+.has-error select,
+.has-error textarea {
+  border-color: red;
+}
+
+.has-error label {
+  color: red;
+}
+
+.has-error .help-block {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+	</style>
+{% endblock %}
+{% block body %}
+
+	{{ form_start(registrationForm,{'attr':{'novalidate':'novalidate'}}) }}
+
+
+	<html
+		lang="en" dir="ltr">
+		<!-- Mirrored from red-parts.html.themeforest.scompiler.ru/themes/red-ltr/Mon compte-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 22:33:30 GMT -->
+
+
+		<body>
+			<!-- site -->
+			<div
+				class="site">
+				<!-- site__body -->
+				<div class="site__body">
+					<div class="block-space block-space--layout--after-header"></div>
+					<div class="block" style="margin: 0 auto">
+						<div class="container container--max--lg">
+							<div class="row" style="margin: 0 auto">
+								<div class="col-md-18 d-flex"></div>
+								<div class="col-md-18 d-flex mt-4 mt-md-0">
+									<div class="card flex-grow-1 mb-0 ml-0 ml-lg-3 mr-0 mr-lg-4">
+										<div class="card-body card-body--padding--2">
+											<h3 class="card-title" style="text-align:center;">S'inscrire</h3>
+
+											<form>
+												<div class="form-group">
+													{{ form_label(registrationForm.nom,"Nom") }}
+													{{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.nom) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.prenom,"Prenom") }}
+													{{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.prenom) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.genre,"Vous etes") }}
+													{{ form_widget(registrationForm.genre, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.genre) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.cin,"CIN") }}
+													{{ form_widget(registrationForm.cin, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.cin) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.email,"Email") }}
+													{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'user@example.com'}}) }}
+													{{ form_errors(registrationForm.email) }}
+												</div>
+												<div class="form-group">
+
+
+													{{ form_label(registrationForm.telephone,"Telephone") }}
+													{{ form_widget(registrationForm.telephone, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.telephone) }}
+												</div>
+												<div class="form-group">
+
+													{{ form_label(registrationForm.login,"Login") }}
+													{{ form_widget(registrationForm.login, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.login) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.password ,"Mot de passe") }}
+													{{ form_widget(registrationForm.password, {'attr': {'class': 'form-control form-control-sm', 'type': 'PasswordType', 'placeholder': 'Mot de passe'}}) }}
+													{{ form_errors(registrationForm.password) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.confirm_password ,"Confirmer le mot de passe") }}
+													{{ form_widget(registrationForm.confirm_password, {'attr': {'class': 'form-control form-control-sm', 'type': 'PasswordType', 'placeholder': 'Resaisir le meme mot de passe '}}) }}
+													{{ form_errors(registrationForm.confirm_password) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.date_de_naissance,"Date de naissance") }}
+													{{ form_widget(registrationForm.date_de_naissance) }}
+													{{ form_errors(registrationForm.date_de_naissance) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.region ,"Region") }}
+													{{ form_widget(registrationForm.region, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.region) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.adresse,"Adresse") }}
+													{{ form_widget(registrationForm.adresse, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.adresse) }}
+												</div>
+												<div class="form-group">
+													{{ form_label(registrationForm.code_postal,"Code postal") }}
+													{{ form_widget(registrationForm.code_postal, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.code_postal) }}
+												</div>
+
+												
+
+												<div class="form-group">
+													{{ form_label(registrationForm.roles,"Role") }}
+													{{ form_widget(registrationForm.roles, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(registrationForm.roles) }}
+												</div>
+
+												<div class="form-group form-check">
+													{{ form_widget(registrationForm.Accepter_le_reglement, {'attr': {'class': 'form-check-input'}}) }}
+													{{ form_label(registrationForm.Accepter_le_reglement, "J'accepte le règlement", {'label_attr': {'class': 'form-check-label'}}) }}
+												</div>
+												{{ form_widget(registrationForm.captcha)}}
+												<br>
+												<a href="{{ path('app_reglement') }}" class="btn btn-primary mt-3" download>Télécharger le règlement</a>
+
+												
+												{{ form_widget(registrationForm.save, {'attr': { 'class':'btn btn-primary mt-3', 'id': 'download-button'}}) }}
+
+												<script>
+													document.getElementById("download-link").addEventListener("click", function () {
+																			var xhr = new XMLHttpRequest();
+																			xhr.open('GET', '{{ path('app_reglement') }}');
+																			xhr.responseType = 'blob';
+																			xhr.onload = function () {
+																			if (xhr.status === 200) {
+																			var url = window.URL.createObjectURL(xhr.response);
+																			document.getElementById("download-link").href = url;
+																			window.URL.revokeObjectURL(url);
+																			}
+																			};
+																			xhr.send();
+																			});
+												</script>
+
+
+												{{ form_end(registrationForm) }}
+
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block-space block-space--layout--before-footer"></div>
+				</div>
+				<!-- site__body / end -->
+
+				<!-- site / end -->
+			</body>
+		</body>
+	</html>
+{% endblock %}

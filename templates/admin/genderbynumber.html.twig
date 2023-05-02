@@ -1,0 +1,57 @@
+{% extends "baseB.html.twig" %}
+
+{% block body %}
+    <div>
+        <canvas id="user-chart"></canvas>
+    </div>
+
+    <script>
+        // Récupérer les données sur les utilisateurs
+        const usersData = JSON.parse('{{ usersData|json_encode|raw }}');
+
+        // Créer un tableau avec le nombre d'utilisateurs par genre
+        const genders = ['Femme', 'Homme', 'Non spécifié'];
+        const userCounts = [0, 0, 0];
+        for (let i = 0; i < usersData.length; i++) {
+            const gender = usersData[i].gender;
+            if (gender === 'female') {
+                userCounts[0]++;
+            } else if (gender === 'male') {
+                userCounts[1]++;
+            } else {
+                userCounts[2]++;
+            }
+        }
+
+        // Créer un graphique à barres pour afficher le nombre d'utilisateurs par genre
+        const ctx = document.getElementById('user-chart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: genders,
+                datasets: [{
+                    label: 'Nombre d\'utilisateurs',
+                    data: userCounts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

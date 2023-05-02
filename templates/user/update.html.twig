@@ -1,0 +1,102 @@
+{% extends "baseF.html.twig" %}
+
+{% block body %}
+	<html lang="en" dir="ltr">
+		<body>
+			<!-- site -->
+			<div class="site">
+				<div class="site__body">
+					<div class="block-space block-space--layout--after-header"></div>
+					<div class="block">
+						<div class="container container--max--xl">
+							<div class="row">
+								<div class="col-12 col-lg-3 d-flex">
+									<div class="account-nav flex-grow-1">
+										<h4 class="account-nav__title">Navigation</h4>
+										<ul class="account-nav__list">
+											
+											<li class="account-nav__item">
+												<a href="{{path('app_add_reclamation')}}">Ajouter une reclamation</a>
+											</li>
+											<li class="account-nav__item">
+												<a href="{{path('app_list_reclamation')}}">Mes reclamations</a>
+											</li>
+
+
+											<li class="account-nav__item account-nav__item--active">
+												<a href="{{path('app_update_user',{ 'id':app.user.id  })}}">Modifier mon profile</a>
+											</li>
+
+											<li class="account-nav__item">
+												<a href="{{path('app_forgot_password_request')}}">Mot de passe oublié
+												</a>
+											</li>
+											<li class="account-nav__divider" role="presentation"></li>
+											<li class="account-nav__item">
+												<a href="{{path('app_logout')}}">Logout</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+									<div class="card-header">
+										<h5>Modifier mon profile</h5>
+									</div>
+									<div class="card-divider"></div>
+									<div class="card-body card-body--padding--2">
+										<div class="row no-gutters">
+											<div
+												class="col-12 col-lg-7 col-xl-6">
+
+
+												{# pour désactiver les contrôles de saisie côté serveur et prendre en compte uniquement les contraintes de saisie côté client #}
+												{{ form_start(userformupdate, {'attr': {'novalidate': 'novalidate'}}) }}
+
+												<div class="form-group">{{ form_label(userformupdate.email, "Email") }}
+													{{ form_widget(userformupdate.email) }}
+													{{ form_errors(userformupdate.email) }}</div>
+
+
+												<div class="form-group">{{ form_label(userformupdate.telephone, "Téléphone") }}
+													{{ form_widget(userformupdate.telephone, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(userformupdate.telephone) }}</div>
+
+
+												<div class="form-group">{{ form_label(userformupdate.login, "Login") }}
+													{{ form_widget(userformupdate.login, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(userformupdate.login) }}</div>
+
+
+												<div class="form-group">{{ form_label(userformupdate.region , "Region") }}
+													{{ form_widget(userformupdate.region, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(userformupdate.region) }}</div>
+
+
+												<div class="form-group">{{ form_label(userformupdate.adresse, "Adresse") }}
+													{{ form_widget(userformupdate.adresse, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(userformupdate.adresse) }}</div>
+
+
+												<div class="form-group">{{ form_label(userformupdate.code_postal, "Code postal") }}
+													{{ form_widget(userformupdate.code_postal, {'attr': {'class': 'form-control'}}) }}
+													{{ form_errors(userformupdate.code_postal) }}</div>
+
+
+												{{ form_widget(userformupdate.Update, {'attr': {'class': 'btn btn-primary'}}) }}
+												{{ form_end(userformupdate) }}
+
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+								<div class="block-space block-space--layout--before-footer"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
+{% endblock %}

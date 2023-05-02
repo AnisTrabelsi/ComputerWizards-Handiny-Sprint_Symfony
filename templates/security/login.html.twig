@@ -1,0 +1,192 @@
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Softnio">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Multi-purpose admin dashboard template that especially build for programmers.">
+        <title>Handiny </title>
+        <link rel="stylesheet" href="https://html.nioboard.themenio.com/assets/css/style.css?v1.1.1">
+    </head>
+    <body class="nk-body" data-sidebar-collapse="lg" data-navbar-collapse="lg">
+        <div class="nk-app-root">
+            <div class="nk-main">
+                <div class="nk-wrap align-items-center justify-content-center">
+                    <div class="container p-2 p-sm-4">
+                        <div class="card overflow-hidden card-gutter-lg rounded-4 card-auth card-auth-mh">
+                            <div class="row g-0 flex-lg-row-reverse">
+                                <div class="col-lg-5">
+                                    <div class="card-body h-100 d-flex flex-column justify-content-center">
+                                        <div class="nk-block-head text-center">
+                                            <div class="nk-block-head-content">
+                                                <style>
+                                                  .custom-color {
+                                                    color: #41AF64 ; /* Remplacez cette valeur par la couleur souhaitée */
+                                                  }
+                                                </style>
+                                                <h2 class="nk-block-title mb-1 custom-color">Merci pour votre confiance !</h2>
+                                            </div>
+                                        </div>
+                                      <style>
+                                        .custom-input {
+                                          width: 300px; /* ou toute autre largeur souhaitée */
+                                        }
+                                        
+                                        .custom-input:hover {
+                                          background-color: green; /* ou toute autre couleur de votre choix */
+                                        }
+                                        .btn-primary {
+                                            background-color: #41AF64;
+                                            border-color: #41AF64;
+                                          }
+
+                                          .btn-primary:hover {
+                                            background-color: #2E8540;
+                                            border-color: #2E8540;
+                                          }
+
+                                          .form-signin {
+                                            max-width: 330px;
+                                            margin: 0 auto;
+                                            padding: 15px;
+                                            text-align: center;
+                                          }
+
+                                          .form-signin .form-signin-heading,
+                                          .form-signin .checkbox {
+                                            margin-bottom: 10px;
+                                          }
+
+                                          .form-signin .checkbox {
+                                            font-weight: normal;
+                                          }
+
+                                          .form-signin .form-control {
+                                            position: relative;
+                                            box-sizing: border-box;
+                                            height: auto;
+                                            padding: 10px;
+                                            font-size: 16px;
+                                          }
+
+                                          .form-signin .form-control:focus {
+                                            z-index: 2;
+                                          }
+
+                                      </style>
+                                      <form method="post" class="form-signin">
+                                    <h3 class="form-signin-heading mb-3">Se connecter à son compte</h3>
+                                    <label for="inputEmail" class="sr-only">Email</label>
+                                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                    <label for="inputPassword" class="sr-only">Mot de passe</label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                  <style>
+                                  
+                                  </style>
+                                    <div class="checkbox mb-3">
+                                      <input type="checkbox" name="_remember_me" id="rememberMe">
+                                      <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+                                    </div>
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+                                  </form>
+                                  
+                                        <div class="my-3 text-center">
+                                            <h6 class="overline-title overline-title-sep">
+                                                <span>Ou</span>
+                                            </h6>
+                                        </div>
+                                      <style>
+                                      .big {
+                                        font-size: 18 px ;
+                                      }
+                                      </style>
+                                        <div class="text-center mt-4">
+                                            <p class="big">
+                                          Vous n'avez pas de compte? <a href="{{ path('app_add_user') }}" class="text-blue">S'inscrire</a>                                            </p>
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <p class="big">
+                                          <a href="{{ path('app_forgot_password_request') }}" class="text-blue">Mot de passe oublié ?</a>                                        </div>
+                                        
+                                    </div>
+                                </div>
+                              <style>
+
+                                  .card-body {
+                                    background-color: #ffffff; /* change the background color to white */
+                                    height: 400px; /* change the height to 400 pixels */
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center; /* change the vertical alignment to center */
+                                    align-items: center; /* add horizontal center alignment */
+                                    text-align: center; /* center the text within the div */
+                                  }
+                                  .bg-dark {
+                                    background-color: #41AF64; /* set the background color for the new class */
+                                    color: #fff; /* set the text color for the new class */
+                                  }
+                                  
+                                  .has-mask {
+                                    /* remove the mask effect */
+                                    mask-image: none;
+                                    -webkit-mask-image: none;
+                                  }
+                                  
+                              </style>
+                                <div class="col-lg-7">
+                            <style>
+                              .card-body {
+                                padding-top: 10px; /* Vous pouvez ajuster la valeur selon vos besoins */
+                              }
+                            </style>
+                            
+
+                                <div class="card-body bg-dark is-theme has-mask has-mask-1 h-100 d-flex flex-column justify-content">
+                                  <div><img class="image__tag" width="420" height="280" src="{{ asset('front/images/logoo.png') }}" alt="image de voiture"></div>
+       
+                                    <div class="text-center">
+                                  <h3>Nous sommes ravis de vous servir 🚗🌟</h3>
+                                  <p>Vous pouvez nous contacter sur  : 
+                                  <a href="mailto:hadiny@esprit.tn"style="color: #41AF64;">hadiny@esprit.tn</a></p>
+                                  <p>🗺️📍 Notre siége  : Esprit bloc M </p>
+                                </div>                                  
+
+                                           
+                                        <div class="mt-5">
+                                            <div class="media-group media-group-overlap">
+                                                <div class="media media-sm media-circle media-border border-white">
+                                                    <img src="https://html.nioboard.themenio.com/images/avatar/a.jpg" alt="">
+                                                </div>
+                                                <div class="media media-sm media-circle media-border border-white">
+                                                    <img src="https://html.nioboard.themenio.com/images/avatar/b.jpg" alt="">
+                                                </div>
+                                                <div class="media media-sm media-circle media-border border-white">
+                                                    <img src="https://html.nioboard.themenio.com/images/avatar/c.jpg" alt="">
+                                                </div>
+                                                <div class="media media-sm media-circle media-border border-white">
+                                                    <img src="https://html.nioboard.themenio.com/images/avatar/d.jpg" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                      <div class="text-center">
+
+                                    <p class="small text-muted"> <a href="{{ path('app_add_user') }}" class="text-blue" style="color:#c7c1c1;">Rejoignez-nous !</a>.</p>
+                                  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://html.nioboard.themenio.com/assets/js/bundle.js"></script>
+    <script src="https://html.nioboard.themenio.com/assets/js/scripts.js"></script>
+</html>
+
+{% endblock %}

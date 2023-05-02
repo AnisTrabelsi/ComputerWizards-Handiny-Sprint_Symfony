@@ -1,0 +1,111 @@
+{% extends "baseB.html.twig" %}
+{% block body%}
+
+
+	<body>
+		<!-- site -->
+		<div
+			class="site">
+
+
+			<!-- site__body -->
+			<div class="site__body">
+				<div class="block-space block-space--layout--after-header"></div>
+				<div class="block">
+					<div class="container container--max--xl">
+						<div class="row">
+
+							<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+								<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+									<div class="card">
+										{{ form_start(reclamationform,{'attr':{'novalidate':'novalidate'}}) }}
+
+										<div class="card-header">
+											<h5>Repondre une reclamation</h5>
+										</div>
+
+										<div class="order-header">
+											<div class="order-header__actions">
+												<a href="/reclamation/list" class="btn btn-xs btn-secondary">Retour a la liste</a>
+											</div>
+											<h5 class="order-header__title"> Cette reclamtion concerne le  {{reclamation.getTypeReclamation() }} </h5>
+
+										</div>
+										<div class="card-divider"></div>
+										<div class="card-table">
+											<div class="table-responsive-sm">
+												<table>
+													<thead>
+														<tr>
+															<th>Description</th>
+
+														</tr>
+													</thead>
+													<tbody class="card-table__body card-table__body--merge-rows">
+														<tr>
+															<td>{{ reclamation.getDescription()}}</td>
+
+														</tr>
+													</tbody>
+													<tbody class="card-table__body card-table__body--merge-rows">
+														<tr>
+															<th>Etat de votre reclamation
+															</th>
+
+														</tr>
+														<tr>
+
+															<td>{{ reclamation.getEtatReclamation()}}</td>
+														</tr>
+
+													</tbody>
+													<tfoot>
+														<tr>
+															<th>Reponse a votre reclamation
+															</th>
+
+														</tr>
+														<tr></tr>
+														<tr>
+															<td contenteditable="true" onclick="activateDescriptionEdit(event)">
+																{{ form_label(reclamationform.reponse,"Description") }}
+																{{ form_widget(reclamationform.reponse, {'attr': {'class': 'form-control'}}) }}
+																{{ form_errors(reclamationform.reponse) }}
+															</td>
+														</tr>
+													</tfoot>
+												</tr>
+											</tfoot>
+										</table>
+
+									</div>
+
+								</div>
+								<div class="form-group mb-0 pt-3 mt-3">
+									{{ form_widget(reclamationform.Update, {'attr': {'class': 'btn btn-primary'}}) }}
+								</div>
+
+
+								<script>
+									function activateDescriptionEdit(event) {
+event.target.focus();
+}
+								</script>
+
+
+								{{ form_end(reclamationform) }}
+
+							</div>
+						</div>
+						<div class="block-space block-space--layout--before-footer"></div>
+					</div>
+
+
+				</div>
+
+			</body>
+
+		</body>
+	
+{% endblock %}
+

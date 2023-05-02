@@ -1,0 +1,9 @@
+<ul>
+    {% for u in users %}
+    <li>    {{ u.nom }} ** {{ u.prenom}} ** {{ u.email}}
+    <a href="{{ path('app_update_user', {'id':u.getIduser}) }}">Modifier</a>
+    <a href="{{ path('app_remove_user', {'id':u.iduser}) }}">Supprimer</a>
+
+    {% endfor %}
+    </li>
+</u>

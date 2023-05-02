@@ -1,0 +1,108 @@
+{% extends 'baseF.html.twig'%}
+ 
+{% block title %}COVOITURAGE{% endblock %}
+ {# {% block stylesheets %}
+    <style>
+        #search {
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          padding: 8px 12px;
+          font-size: 16px;
+          width: 100%;
+          margin-bottom: 16px;
+        }
+
+        #search:focus {
+          outline: none;
+          border-color: #6ea1ff;
+          box-shadow: 0 0 0 2px rgba(110, 161, 255, 0.3);
+        }
+    </style>
+{% endblock %} #}
+ 
+{% block body %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+            <h1 class="text-center mt-4">Les Covoiturages</h1>
+        </div>
+    </div>
+<form method="get" action="{{ path('book') }}">
+  <input id="search" type="text" name="search"  placeholder="Search for...">
+  {# <button type="submit">Search</button> #}
+</form>
+ 
+<form method="post" class="form-inline">
+  <div class="form-group mr-2">
+    <input type="checkbox" id="tri_ascendant" name="tri_ascendant" value="1" class="form-check-input" {% if tri_ascendant %}checked{% endif %}>
+    <label for="tri_ascendant" class="form-check-label">Trier par Date ascendant</label>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Trier</button>
+  </div>
+</form>
+
+
+<div class="list-view-toolbar">
+                   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    <div class="row">
+        <div class="col-md-8 mb-4">
+            <a href="{{ path('docc') }}" class="btn btn-success">Create new</a>
+        </div>
+ 
+  
+ 
+    </div>
+    <script>
+$(document).ready(function() {
+  // Listen for changes in the search input field
+  $('#search').on('input', function() {
+    var searchTerm = $(this).val().toLowerCase();
+    // Hide all covoiturage cards
+    $('.covoiturage-card').hide();
+    // Find the cards that match the search term and mark them as search results
+    $('.covoiturage-card').filter(function() {
+      return $(this).text().toLowerCase().indexOf(searchTerm) > -1;
+    }).addClass('search-result').show();
+    // Reset the order of all cards in the grid
+    $('.card-columns .covoiturage-card').css('order', '');
+    // Set the order of the search results to -1
+    $('.card-columns .search-result').css('order', '-1');
+  });
+});
+
+ 
+    </script>
+    <div class="row">
+       {% for covoiturage in covoiturages %}
+    <div class="col-md-4 mb-4">
+        <div class="cardj covoiturage-card">
+          <div class="card-body">
+<h5 class="card-title"><i class="fas fa-car"  style="color: blue;"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ covoiturage.depart }} &nbsp;&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;&nbsp; {{ covoiturage.destination }}</h5>
+  <p class="card-text">Date: {{ covoiturage.dateCovoiturage ? covoiturage.dateCovoiturage|date('Y-m-d H:i') : '' }}</p>
+  <p class="card-text">Prix: {{ covoiturage.Prix }} DT</p>
+  <p class="card-text">Nombre des places : {{ covoiturage.nbrplace }}</p>
+  <a href="{{ path('app_cov_detail', {'id': covoiturage.id}) }}" class="btn btn-primary">Reserver</a>
+</div>
+        </div>
+    </div>
+    {% if loop.index % 3 == 0 %}
+        </div><div class="row">
+    {% endif %}
+{% else %}
+    <div class="col-12">
+        <p>No records found.</p>
+    </div>
+{% endfor %}
+ 
+    </div>
+ 
+{% endblock %}

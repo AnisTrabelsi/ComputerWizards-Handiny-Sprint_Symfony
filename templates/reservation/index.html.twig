@@ -1,0 +1,34 @@
+{% extends 'baseF.html.twig'%}
+
+{% block title %}Mes reservations {% endblock %}
+
+{% block body %}
+    <h1>ReservationCovoiturage index</h1>
+
+    <div class="row">
+        {% for reservation_covoiturage in reservation_covoiturages %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ reservation_covoiturage.depart }} -> {{ reservation_covoiturage.destination }}</h5>
+                    <p class="card-text">Prix: {{ reservation_covoiturage.prixCovoiturage }} DT</p>
+                    {{ include('reservation/_delete_form.html.twig') }}
+
+       
+
+                    {# <a href="{{ path('app_reservation_show', {'id': reservation_covoiturage.id}) }}">show</a> #}
+                    {# <a href="{{ path('app_reservation_edit', {'id': reservation_covoiturage.id}) }}">edit</a> #}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">
+                no records found
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {# <a href="{{ path('app_reservation_new') }}">Create new</a> #}
+{% endblock %}

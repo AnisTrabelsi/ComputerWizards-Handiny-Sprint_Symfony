@@ -1,0 +1,126 @@
+{% extends 'baseF.html.twig' %}
+{% block body %}
+	<!-- site__body -->
+	<div class="site__body">
+
+		<div class="block-space block-space--layout--after-header"></div>
+		<div class="block">
+			<div class="container container--max--xl">
+				<div class="row">
+					<div class="col-12 col-lg-3 d-flex">
+						<div class="account-nav flex-grow-1">
+							<h4 class="account-nav__title">Navigation</h4>
+							<ul class="account-nav__list">
+								
+								<li class="account-nav__item">
+									<a href="{{ path('app_Affichage_Reservations_Voitures_Locataire') }}">Mes réservations de voitures</a>
+								</li>
+								<li class="account-nav__item">
+									<a href="{{ path('app_Affichage_Reservations_Voitures_prop') }}">Demandes de réservations
+									</a>
+								</li>
+								<li class="account-nav__item account-nav__item--active">
+									<a href="{{ path('voitures_prop') }}">Mes voitures</a>
+								</li>
+
+								<li class="account-nav__item">
+									<a href="account-addresses.html">Mon profil</a>
+								</li>
+
+								<li class="account-nav__divider" role="presentation"></li>
+								<li class="account-nav__item">
+									<a href="account-login.html">Se déconnecter</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+						<div class="card">
+							<div class="card-header">
+								<h5>Garage</h5>
+							</div>
+							<div class="card-divider"></div>
+
+
+							<div class="card-divider"></div>
+
+							<div class="card-body card-body--padding--2">
+								<div class="vehicles-list vehicles-list--layout--account">
+									<div class="vehicles-list__body">
+										{% for voiture in voitures %}
+											<div class="vehicles-list__item">
+												<div class="vehicles-list__item-info">
+													<div class="vehicles-list__item-name">{{voiture.marque}}</div>
+													<div class="vehicles-list__item-details">{{voiture.modele}}</div>
+													<div class="vehicles-list__item-details"><img class="image__tag" src="{{ asset('front/images/voitures/' ~ voiture.getImageVoiture()) }}" alt="image de voiture" width="150" height="150"></div>
+
+
+													<div class="vehicles-list__item-links">
+														<a href="{{ path('app_voiture_detail', {'id': voiture.getId()}) }}">Plus de détails</a>
+													</div>
+												</div>
+
+
+												<a href="{{ path('remove_voiture', {'id': voiture.getId()}) }}" class="btn btn-sm btn-danger">
+													<i class="fas fa-trash"></i>
+												</a>
+
+
+												<a href="{{ path('edit_voiture', {'id': voiture.getId()}) }}" class="btn btn-sm btn-dark">
+													<i class="fas fa-edit"></i>
+												</a>
+
+
+											</div>
+										{% endfor %}
+
+									</div>
+								</div>
+							</div>
+
+
+							<div class="card-divider"></div>
+							<!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+							<!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+							<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+							<!-- Afficher les messages Flash avec Toastr -->
+							{% for type, messages in app.session.flashBag.all() %}
+								{% for message in messages %}
+									<script>
+										toastr.{{ type }}('{{ message }}');
+									</script>
+								{% endfor %}
+							{% endfor %}
+							<style>
+								.flash-messages {
+									position: fixed;
+									bottom: 0;
+									left: 40;
+									right: 250;
+									z-index: 9999;
+								}
+							</style>
+							<div class="card-header">
+								<h5>Ajouter une voiture</h5>
+							</div>
+							<div class="card-divider"></div>
+							<div class="card-body card-body--padding--2">
+								<div class="vehicle-form vehicle-form--layout--account">
+
+									{{ include('voiture/AjouterVoiture.html.twig') }}
+
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+	<!-- site__body / end -->
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'baseB.html.twig' %}
+{% block body %}
+<div class="nk-content-inner">
+                                <div class="nk-content-body">
+                                    <div class="nk-block-head">
+                                        
+                                        <div class="nk-block-head-between gap g-2">
+                                            <div class="gap-col">
+                                                <ul class="nav nav-pills nav-pills-border gap g-3">
+                                                    <li class="nav-item">
+                                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-1" type="button">Overview </button>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <button class="nav-link" type="button">Project </button>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <button class="nav-link" type="button">Documents </button>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <button class="nav-link" type="button">Disabled </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="gap-col">
+                                                <ul class="d-flex gap g-2">
+                                                    <li class="d-none d-md-block">
+                                                        <a href="https://html.nioboard.themenio.com/user-manage/user-edit.html" class="btn btn-soft btn-primary">
+                                                            <em class="icon ni ni-edit"></em>
+                                                            <span>Edit Profile</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-md-none">
+                                                        <a href="https://html.nioboard.themenio.com/user-manage/user-edit.html" class="btn btn-soft btn-primary btn-icon">
+                                                            <em class="icon ni ni-edit"></em>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nk-block">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane show active" id="tab-1" tabindex="0">
+                                                <div class="card card-gutter-md">
+                                                    <div class="card-row card-row-lg col-sep col-sep-lg">
+                                                        <div class="card-aside">
+                                                            <div class="card-body">
+                                                                <div class="bio-block">
+                                                                    <h4 class="bio-block-title">Détails</h4>
+                                                                    <ul class="list-group list-group-borderless small">
+                                                                    <li>
+                                                                    	
+											<img class="image__tag" src="{{ asset('front/images/voitures/' ~ voiture.getImageVoiture()) }}" alt="image de voiture" width="300" height="300">
+
+	
+											
+                                                                    </li>
+                                                                     <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Immatriculation:</span>
+                                                                            <span class="text">{{voiture.immatriculation}}</span>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Marque:</span>
+                                                                            <span class="text">{{voiture.marque}}</span>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Modèle:</span>
+                                                                            <span class="text">{{voiture.modele}}</span>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Carburant:</span>
+                                                                            <span class="text">{{voiture.carburant}}</span>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Kilométrage:</span>
+                                                                            <span class="text">{{voiture.kilometrage}}</span>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Prix de location:</span>
+                                                                            <span class="text">{{voiture.getPrixLocation()}}</span>
+                                                                        </li>
+                                                                         <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Boite de vitesse:</span>
+                                                                            <span class="text">{{voiture.getBoiteVitesse()}}</span>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <span class="title fw-medium w-40 d-inline-block">Date de validation technique:</span>
+                                                                            <span class="text">{{ voiture.getDateValidationTechnique()|date('d/m/Y') }}</span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                               
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-content col-sep">
+                                                            <div class="card-body">
+                                                                <div class="bio-block">
+                                                                    <h4 class="bio-block-title">Description:</h4>
+                                                                    <p>{{voiture.description}}</p>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+{% endblock %}

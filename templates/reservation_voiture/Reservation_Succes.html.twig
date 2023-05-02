@@ -1,0 +1,103 @@
+{% extends 'baseF.html.twig' %}
+{% block body %}
+<div class="site__body">
+				<div class="block-space block-space--layout--spaceship-ledge-height"></div>
+				<div class="block order-success">
+					<div class="container">
+						<div class="order-success__body">
+							<div class="order-success__header">
+								<div class="order-success__icon">
+									<svg width="100" height="100">
+										<path d="M50,100C22.4,100,0,77.6,0,50S22.4,0,50,0s50,22.4,50,50S77.6,100,50,100z M50,2C23.5,2,2,23.5,2,50
+																				        s21.5,48,48,48s48-21.5,48-48S76.5,2,50,2z M44.2,71L22.3,49.1l1.4-1.4l21.2,21.2l34.4-34.4l1.4,1.4L45.6,71
+																				        C45.2,71.4,44.6,71.4,44.2,71z"/>
+									</svg>
+								</div>
+								<h1 class="order-success__title">Merci</h1>
+								<div class="order-success__subtitle">Votre demande de réservation a été bien envoyée !</div>
+								<div class="order-success__actions">
+									<a href="{{ path('app_voiture') }}" class="btn btn-sm btn-secondary">Retourner à la page d'acceuil</a>
+								</div>
+							</div>
+							<div class="card order-success__meta">
+								<ul class="order-success__meta-list">
+									<li class="order-success__meta-item">
+										<span class="order-success__meta-title">Date de demande de Réservation:</span>
+										<span class="order-success__meta-value">{{reservation_voiture.getDateDemandeReservation()|date('d/m/Y')}}</span>
+									</li>
+									
+									<li class="order-success__meta-item">
+										<span class="order-success__meta-title">Date de début de Réservation:</span>
+										<span class="order-success__meta-value">{{reservation_voiture.getDateDebutReservation()|date('d/m/Y') }}</span>
+									</li>
+									<li class="order-success__meta-item">
+										<span class="order-success__meta-title">Date de fin de Réservation:</span>
+										<span class="order-success__meta-value">{{reservation_voiture.getDateFinReservation()|date('d/m/Y') }}</span>
+									</li>
+									<li class="order-success__meta-item">
+										<span class="order-success__meta-title">Statut:</span>
+										<span class="order-success__meta-value">{{reservation_voiture.getEtatDemandeReservation() }}</span>
+									</li>
+									
+								</ul>
+							</div>
+							<div class="card">
+								<div class="order-list">
+									<table>
+										<thead class="order-list__header">
+											<tr>
+												<th class="order-list__column-label" colspan="2">Informations de la voiture réservée</th>
+												
+											</tr>
+										</thead>
+										
+										<tbody class="order-list__subtotals">
+										<tr>
+												<th class="order-list__column-label" colspan="3">Immatriculation</th>
+												<td class="order-list__column-total">{{voiture.immatriculation}}</td>
+											</tr>
+											<tr>
+												<th class="order-list__column-label" colspan="3">Marque</th>
+												<td class="order-list__column-total">{{voiture.marque}}</td>
+											</tr>
+											<tr>
+												<th class="order-list__column-label" colspan="3">Modèle</th>
+												<td class="order-list__column-total">{{voiture.modele}}</td>
+											</tr>
+											<tr>
+												<th class="order-list__column-label" colspan="3">Prix de location</th>
+												<td class="order-list__column-total">{{voiture.getPrixLocation()}}DT</td>
+											</tr>
+											
+										</tbody>
+										
+									</table>
+									<div class="order-success__addresses">
+								<div class="order-success__address card address-card">
+									 <img class="image__tag" src="{{ asset('front/images/voitures/' ~ voiture.getImageVoiture()) }}" alt="image de voiture" width="300" height="300">
+								</div>
+								<div class="order-success__address card address-card">
+									<div class="address-card__badge tag-badge tag-badge--theme">Description :</div>
+									<br/>
+									<br/>
+									<div class="address-card__body">
+										
+					
+										<div class="address-card__row">
+											<p>{{voiture.description}}<p>
+										</div>
+									</div>
+								</div>
+							</div>		
+												
+										
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="block-space block-space--layout--before-footer"></div>
+			</div>
+			<!-- site__body / end -->
+            {% endblock %}

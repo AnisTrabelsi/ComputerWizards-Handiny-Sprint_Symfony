@@ -1,0 +1,122 @@
+{% extends 'baseF.html.twig' %}
+{% block body %}
+	<!-- site__body -->
+	<div class="site__body">
+		<div class="block-space block-space--layout--after-header"></div>
+		<div class="block">
+			<div class="container container--max--xl">
+				<div class="row">
+					<div class="col-12 col-lg-3 d-flex">
+						<div class="account-nav flex-grow-1">
+							<h4 class="account-nav__title">Navigation</h4>
+						<ul class="account-nav__list">
+								<li class="account-nav__item">
+									<a href="{{path('app_list_don')}}">Liste des dons </a>
+								</li>
+								<li class="account-nav__item">
+									<a  href="{{path('app_list_demandedon')}}">Vos demandes de dons</a>
+								</li>
+					
+								<li class="account-nav__item">
+									<a href="{{path('app_add_don')}}">Ajouter un don</a>
+								</li>
+
+								<li class="account-nav__item account-nav__item--active">
+									<a href="{{path('app_list_mesdon')}}">Mes dons</a>
+								</li>
+
+								<li class="account-nav__divider" role="presentation"></li>
+								<li class="account-nav__item">
+									<a href="account-login.html">Se déconnecter</a>
+								</li>
+							</ul>	
+						</div>
+					</div>
+					<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+						<div class="card">
+							<div class="card-header">
+								<h5>Mes dons</h5>
+							</div>
+							<div class="card-divider"></div>
+
+
+							<div class="card-divider"></div>
+
+							<div class="card-body card-body--padding--2">
+								<div class="vehicles-list vehicles-list--layout--account">
+									<div class="vehicles-list__body">
+									{% if dons|length > 0 %}
+										{% for don in dons %}
+											<div class="vehicles-list__item">
+												<div class="vehicles-list__item-info">
+													<div class="vehicles-list__item-name">{{don.type}}</div>
+													<div class="vehicles-list__item-details">Date d'ajout : {{don.dateAjout| date('d/m/Y') }}</div>
+													<div class="vehicles-list__item-links">
+														<a href="{{ path('app_don_detail', {'id': don.idDon}) }}">Plus de détails</a>
+													</div>
+												</div>
+
+
+												<a href="{{ path('app_remove_don', {'id': don.idDon}) }}" class="btn btn-sm btn-danger mx-2">
+	<i class="fas fa-trash"></i>
+</a>
+
+<a href="{{ path('app_update_don', {'id': don.idDon}) }}" class="btn btn-sm btn-dark mx-2">
+	<i class="fas fa-edit"></i>
+</a>
+   <!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+<!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- Afficher les messages Flash avec Toastr -->
+{% for type, messages in app.session.flashBag.all() %}
+   {% for message in messages %}
+      <script>
+         toastr.{{ type }}('{{ message }}');
+      </script>
+   {% endfor %}
+{% endfor %}
+<style>.flash-messages {
+  position: fixed;
+  bottom: 0;
+  left: 40;
+  right: 250;
+  z-index: 9999;
+}
+/* Personnalisation des messages d'erreur Toastr */
+.toast-error {
+  background-color: red;
+}
+
+</style>
+
+											</div>
+											
+										{% endfor %}
+
+
+									</div>
+									<br>
+									<a href="{{path('app_add_don')}}" class="btn btn-primary btn-sm ">Ajouter un don</a>
+								</div>
+								<br>
+								 {{ knp_pagination_render(dons) }}
+								     {% else %}
+                <p>Aucun  don trouvé.</p>
+            {% endif %}
+							</div>
+
+
+							<div class="card-divider"></div>
+
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+	<!-- site__body / end -->
+{% endblock %}

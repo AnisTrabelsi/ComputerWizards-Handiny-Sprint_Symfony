@@ -1,0 +1,138 @@
+{% extends 'BaseB.html.twig' %}
+{% block stylesheets %}
+  {{ parent() }}
+  {{ parent() }}
+  <style>
+ /* Styling for the form title */
+h2 {
+  font-size: 3rem;
+  margin: 2rem auto 1rem auto;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+
+/* Styling for the form container */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+    height: 100vh;
+  
+}
+
+
+/* Styling for the form itself */
+.form-horizontal {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  
+}
+
+/* Styling for the form inputs */
+.form-control {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Styling for the form labels */
+.control-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Styling for the form buttons */
+.btn-container {
+  display: flex;
+  justify-content: center;
+    
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary {
+  color: white;
+  background-color: #red;
+  border-color: #red;
+}
+
+.btn-primary:hover {
+  background-color: #black;
+}
+
+
+    
+  </style>
+{% endblock %}
+{% block body %}
+<br><br><br>
+<h2>Modifier le don</h2>
+
+{{ form_start(myForm, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal'}}) }}
+
+
+<div class="form-group" >
+    {{ form_label(myForm.idUtilisateur, 'Utilisateur', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(myForm.idUtilisateur, {'attr': {'class': 'form-control'}}) }}
+      {{ form_errors(myForm.idUtilisateur) }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    {{ form_label(myForm.type, 'Type', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(myForm.type, {'attr': {'class': 'form-control'}}) }}
+      {{ form_errors(myForm.type) }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    {{ form_label(myForm.imageDon, 'Image', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(myForm.imageDon, {'attr': {'class': 'form-control'}}) }}
+      {{ form_errors(myForm.imageDon) }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    {{ form_label(myForm.description, 'Description', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(myForm.description, {'attr': {'class': 'form-control'}}) }}
+      {{ form_errors(myForm.description) }}
+    </div>
+  </div>
+
+ 
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      {{ form_widget(myForm.Save, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+  </div>
+
+{{ form_end(myForm) }}
+
+{% endblock %}

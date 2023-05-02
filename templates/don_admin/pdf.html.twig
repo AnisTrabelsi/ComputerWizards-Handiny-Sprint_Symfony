@@ -1,0 +1,48 @@
+<h1 class="align-center">Bienvenue dans votre application Travel me </h1>
+
+<p>Voila la liste de tout les Utilsateurs</p>
+
+{% if dons|length > 0 %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Utilisateur</th>
+            <th>Type</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Date d'ajout</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for cl in dons %}
+        <tr>
+          <td>{{ cl.idUtilisateur.nom ~" "~cl.idUtilisateur.prenom }}</td>
+            <td>{{ cl.type }}</td>
+            <td>
+                {% if cl.imageDon is null %}
+                Pas d'image insérée
+                {% else %}
+                <img src="{{ asset('uploads/'~ cl.imageDon ) }}" width="250" height="150">
+                <br>{{ cl.imageDon }}
+                {% endif %}
+            </td>
+            <td>{{ cl.description }}</td>
+            <td>{{ cl.dateAjout|date }}</td>
+            <td>
+                <a href="{{ path('app_add_demandedon_admin', {'id':cl.idDon}) }}" class="btn btn-primary">Demander</a> <br> <br>
+                <a href="{{ path('app_remove_don_admin', {'id':cl.idDon}) }}" class="btn btn-danger">Supprimer</a> <br> <br>
+                <a href="{{ path('app_update_don_admin', {'id':cl.idDon}) }}" class="btn btn-primary">Modifier</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    {% else %}
+
+    <p>Aucun don trouvé.</p>
+{% endif %}
+
+{% endblock %}

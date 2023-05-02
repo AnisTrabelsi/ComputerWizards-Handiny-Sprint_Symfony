@@ -1,0 +1,11 @@
+swiftmailer:
+    transport: smtp
+    host: 'localhost'
+    port: 587
+    encryption: tls
+    username: 'anis.trabelsi@esprit.tn'
+    password: 'zdoubida9'
+    spool: { type: memory }
+
+
+   

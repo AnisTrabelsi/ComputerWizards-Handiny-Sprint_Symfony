@@ -1,0 +1,72 @@
+{% extends 'baseB.html.twig'%}
+
+{% block body %}
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="col-md-7 align-self-center">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Mes Covoiturages</h4>
+                        <center>
+                            <div class="nk-widget nk-widget-highlighted">
+                                <div class="nk-widget-content">
+                                    <div class="container-fluid px-0">
+                                        <ul class="nk-widget-categories">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                        <div class="table-responsive table table-striped table-custom">
+                            <table id="myTable" class="table">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Depart</th>
+                                        <th>Destination</th>
+                                        <th>Date</th>
+                                        <th>Prix</th>
+                                        <th>nombre des places</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for covoiturage in covoiturages %}
+                                    <tr>
+                                        <td>{{ covoiturage.depart }}</td>
+                                        <td>{{ covoiturage.destination }}</td>
+                                        <td>{{ covoiturage.dateCovoiturage ? covoiturage.dateCovoiturage|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>{{ covoiturage.Prix }}</td>
+                                        <td>{{ covoiturage.nbrplace }}</td>
+                                        <td>
+
+                                            {{ include('covoiturage/_delete_forrm.html.twig') }}
+                                            <a href="{{ path('app_covoiturage_edit', {'id': covoiturage.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">modifier</button></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
+{% endblock %}
+
+{% endblock %}

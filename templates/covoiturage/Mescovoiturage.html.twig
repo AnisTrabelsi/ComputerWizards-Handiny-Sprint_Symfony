@@ -1,0 +1,36 @@
+{% extends 'baseF.html.twig'%}
+
+{% block body %}
+<div class="page-wrapper">
+  <div class="container-fluid">
+    <div class="row page-titles">
+      <div class="col-md-7 align-self-center">
+        <h4 class="mb-0">Mes Covoiturages</h4>
+      </div>
+    </div>
+    <div class="row">
+      {% for covoiturage in covoiturages %}
+      <div class="col-lg-4 col-md-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-car"  style="color: blue;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{ covoiturage.depart }} &nbsp;&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;&nbsp;  {{ covoiturage.destination }}</h5>
+            <p class="card-text mb-2"><strong>Date:</strong> {{ covoiturage.dateCovoiturage ? covoiturage.dateCovoiturage|date('Y-m-d H:i:s') : '' }}</p>
+            <p class="card-text mb-2"><strong>Prix:</strong> {{ covoiturage.Prix }}</p>
+            <p class="card-text mb-3"><strong>Nombre des places:</strong> {{ covoiturage.nbrplace }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="{{ path('app_covoiturage_edit', {'id': covoiturage.id}) }}" class="btn btn-info">Modifier</a>
+              <a href="#" class="btn btn-link btn-Danger" style="color: white;" onclick="if (confirm('Êtes-vous sûr de vouloir supprimer ce covoiturage ?')) { document.getElementById('delete-form-{{ covoiturage.id }}').submit(); } event.preventDefault();">Supprimer</a>
+              <form id="delete-form-{{ covoiturage.id }}" action="{{ path('app_covoiturage_delete', {'id': covoiturage.id}) }}" method="post" style="display: none;">
+                <input type="hidden" name="_method" value="DELETE">
+                {{ csrf_token('delete' ~ covoiturage.id) }}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,218 @@
+<div id="voitures-container">
+<!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+<!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- Afficher les messages Flash avec Toastr -->
+{% for type, messages in app.session.flashBag.all() %}
+   {% for message in messages %}
+      <script>
+         toastr.{{ type }}('{{ message }}');
+      </script>
+   {% endfor %}
+{% endfor %}
+<style>.flash-messages {
+  position: fixed;
+  bottom: 0;
+  left: 40;
+  right: 250;
+  z-index: 9999;
+}
+</style>
+
+
+
+
+
+
+
+	<div class="products-view__list products-list products-list--grid--4" data-layout="grid" data-with-features="false">
+		{% for voiture in voitures %}
+
+			{% if loop.index % 4 == 1 %}
+				<div class="row">
+				{% endif %}
+
+				<div class="products-list__item" class="col-md-3">
+					<div class="product-card" id="voitures-container">
+						
+						 <div class="product-card__actions-list">
+                                                <button class="product-card__action product-card__action--wishlist" type="button" aria-label="Add to wish list">
+								<a href="{{ path('app_voiture_detail', {'id': voiture.getId()}) }}" class="product-card__action product-card__action--quickview" aria-label="Quick view">
+									<svg width="16" height="16">
+										<path d="M14,15h-4v-2h3v-3h2v4C15,14.6,14.6,15,14,15z M13,3h-3V1h4c0.6,0,1,0.4,1,1v4h-2V3z M6,3H3v3H1V2c0-0.6,0.4-1,1-1h4V3z
+																																																																 M3,13h3v2H2c-0.6,0-1-0.4-1-1v-4h2V13z"/>
+									</svg>
+								</a>
+
+							</button>
+
+							     <button class="product-card__action product-card__action--wishlist" type="button" aria-label="Add to wish list">
+								<a href="{{ path('app_favoris_voitures_add', {'id': voiture.getId()}) }}" class="product-card__action product-card__action--quickview" aria-label="Quick view">
+									<svg width="16" height="16">
+                                                        <path d="M13.9,8.4l-5.4,5.4c-0.3,0.3-0.7,0.3-1,0L2.1,8.4c-1.5-1.5-1.5-3.8,0-5.3C2.8,2.4,3.8,2,4.8,2s1.9,0.4,2.6,1.1L8,3.7
+	l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z"/>
+                                                    </svg>
+								</a>
+
+							</button>
+							
+                                                
+                                               
+                                            </div>
+						<div class="product-card__image">
+							<div class="image image--type--product">
+								<a href="product-full.html" class="image__body">
+									<img class="image__tag" src="{{ asset('front/images/voitures/' ~ voiture.getImageVoiture()) }}" alt="image de voiture">
+								</a>
+							</div>
+						</div>
+						<div class="product-card__info">
+							<div class="product-card__meta">
+								<span class="product-card__meta-title">{{voiture.marque}}</span>
+
+							</div>
+							<div class="product-card__name">
+								<div>
+									{#<div class="product-card__badges">
+																										<div class="tag-badge tag-badge--sale">sale</div>
+																										<div class="tag-badge tag-badge--new">new</div>
+																										<div class="tag-badge tag-badge--hot">hot</div>
+																									</div>
+																									#}
+									<a href="product-full.html">{{voiture.modele}}</a>
+								</div>
+							</div>
+							<div class="product-card__rating">
+								<div class="rating product-card__rating-stars">
+
+								{# Vérification de la présence de la clé 5 dans le tableau noteMoyennes #}
+
+
+								 
+								
+								{% set id = voiture.getId() %}
+                        {% if attribute(notes_moy, id) is defined %}
+                                    {% set notemoy = notes_moy[voiture.getId()] %}
+									<div class="rating__body">
+									{% for i in 1..5 %}
+										{% if i <= notemoy %}
+											<div class="rating__star rating__star--active"></div>
+										{% else %}
+											<div class="rating__star"></div>
+										{% endif %}
+									{% endfor %}
+                                   </div>
+								   
+									
+
+								   
+					   {% else %} 
+					   
+                                    
+									<div class="rating__body">
+									{% for i in 1..5 %}
+										
+											<div class="rating__star"></div>
+										
+									{% endfor %}
+                                   </div>
+								   
+									
+
+								   
+					   {% endif %} 
+
+
+								</div>
+								
+							</div>
+							<div class="product-card__features">
+								<ul>
+									<li>Kilométrage :
+										{{voiture.getKilometrage()}}</li>
+									<li>Carburant :{{voiture.getCarburant()}}</li>
+									<li>Boite de vitesse :{{voiture.getBoiteVitesse()}}</li>
+									<li>Date de validation technique :{{ voiture.getDateValidationTechnique()|date('d/m/Y') }}
+									</li>
+
+
+									<li>Description :{{voiture.description}}</li>
+
+								</ul>
+							</div>
+						</div>
+
+						<div class="product-card__footer">
+							<div class="product-card__prices">
+								<div class="product-card__price product-card__price--current">{{ voiture.getPrixLocation()}}
+									DT</div>
+							</div>
+							<a href="{{ path('app_reservation_voiture_new', {'id': voiture.getId()}) }}" class="product-card__addtocart-icon" aria-label="Add to cart">
+								<svg width="20" height="20">
+									<circle cx="7" cy="17" r="2"/>
+									<circle cx="15" cy="17" r="2"/>
+									<path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6 V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4 C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z"/>
+								</svg>
+							</a>
+
+							<button class="product-card__addtocart-full" type="button">Add to cart</button>
+							<button class="product-card__wishlist" type="button">
+								<svg width="16" height="16">
+									<path d="M13.9,8.4l-5.4,5.4c-0.3,0.3-0.7,0.3-1,0L2.1,8.4c-1.5-1.5-1.5-3.8,0-5.3C2.8,2.4,3.8,2,4.8,2s1.9,0.4,2.6,1.1L8,3.7
+																																																																	l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z"/>
+								</svg>
+								<span>Add to wishlist</span>
+							</button>
+							<button class="product-card__compare" type="button">
+								<svg width="16" height="16">
+									<path d="M9,15H7c-0.6,0-1-0.4-1-1V2c0-0.6,0.4-1,1-1h2c0.6,0,1,0.4,1,1v12C10,14.6,9.6,15,9,15z"/>
+									<path d="M1,9h2c0.6,0,1,0.4,1,1v4c0,0.6-0.4,1-1,1H1c-0.6,0-1-0.4-1-1v-4C0,9.4,0.4,9,1,9z"/>
+									<path d="M15,5h-2c-0.6,0-1,0.4-1,1v8c0,0.6,0.4,1,1,1h2c0.6,0,1-0.4,1-1V6C16,5.4,15.6,5,15,5z"/>
+								</svg>
+								<span>Add to compare</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				{% if loop.index % 4 == 0 or loop.last %}
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	{#{{knp_pagination_render(voitures)}}#}
+	<div class="products-view__pagination">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				{% if voitures.getTotalItemCount() > 1 %}
+					<li class="page-item {% if voitures.getCurrentPageNumber() == 1 %}disabled{% endif %}">
+						<a class="page-link page-link--with-arrow" href="{{ path('app_voiture', {'page': voitures.getCurrentPageNumber() - 1}) }}" aria-label="Previous">
+							<span class="page-link__arrow page-link__arrow--left" aria-hidden="true">
+								<svg width="7" height="11">
+									<path d="M6.7,0.3L6.7,0.3c-0.4-0.4-0.9-0.4-1.3,0L0,5.5l5.4,5.2c0.4,0.4,0.9,0.3,1.3,0l0,0c0.4-0.4,0.4-1,0-1.3l-4-3.9l4-3.9C7.1,1.2,7.1,0.6,6.7,0.3z"/>
+								</svg>
+							</span>
+						</a>
+					</li>
+					{% for page in pagesInRange %}
+						<li class="page-item {% if voitures.getCurrentPageNumber() == page %}active{% endif %}">
+							<a class="page-link" href="{{ path('app_voiture', {'page': page}) }}">{{ page }}</a>
+						</li>
+					{% endfor %}
+					<li class="page-item {% if voitures.getCurrentPageNumber() == lastPageNumber %}disabled{% endif %}">
+						<a class="page-link page-link--with-arrow" href="{{ path('app_voiture', {'page': voitures.getCurrentPageNumber() + 1}) }}" aria-label="Next">
+							<span class="page-link__arrow page-link__arrow--right" aria-hidden="true">
+								<svg width="7" height="11">
+									<path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9
+																									C-0.1,9.8-0.1,10.4,0.3,10.7z"/>
+								</svg>
+							</span>
+						</a>
+					</li>
+				{% endif %}
+			</ul>
+		</nav>
+		{#<div class="products-view__pagination-legend">Showing {{ voitures.getFirstItemNumber() }}~{{ voitures.getLastItemNumber() }} products</div>#}
+	</div>
+</div>

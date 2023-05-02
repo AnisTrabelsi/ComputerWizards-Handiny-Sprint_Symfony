@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<title>ReservationVoiture index</title>
+
+{% block body %}
+    <h1>ReservationVoiture index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id_reservation_voiture</th>
+                <th>Date_debut_reservation</th>
+                <th>Etat_demande_reservation</th>
+                <th>Description_reservation</th>
+                <th>Date_demande_reservation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation_voiture in reservation_voitures %}
+            <tr>
+                <td>{{ reservation_voiture.idReservationVoiture }}</td>
+                <td>{{ reservation_voiture.dateDebutReservation ? reservation_voiture.dateDebutReservation|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation_voiture.etatDemandeReservation }}</td>
+                <td>{{ reservation_voiture.descriptionReservation }}</td>
+                <td>{{ reservation_voiture.dateDemandeReservation ? reservation_voiture.dateDemandeReservation|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_voiture_show', {'id_reservation_voiture': reservation_voiture.id_reservation_voiture}) }}">show</a>
+                    <a href="{{ path('app_reservation_voiture_edit', {'id_reservation_voiture': reservation_voiture.id_reservation_voiture}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_voiture_new') }}">Create new</a>
+{% endblock %}

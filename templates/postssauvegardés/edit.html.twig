@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Postssauvegardés</title>
+
+{% block body %}
+    <h1>Edit Postssauvegardés</h1>
+
+    {{ include('postssauvegardés/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_postssauvegard_s_index') }}">back to list</a>
+
+    {{ include('postssauvegardés/_delete_form.html.twig') }}
+{% endblock %}

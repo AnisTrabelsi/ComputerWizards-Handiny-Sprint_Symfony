@@ -1,0 +1,140 @@
+{% extends 'baseF.html.twig' %}
+{% block title %}
+	Liste de sauvegardes
+{% endblock %}
+{% block stylesheets %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<title>Blog Classic Left Sidebar — Red Parts</title>
+	<link
+	rel="icon" type="image/png" href="images/favicon.png">
+	<!-- fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i">
+	<link
+	href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+	<!-- css -->
+	<link rel="stylesheet" href="{{asset('front/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/css/cssnewsujet.css')}}">
+	<link rel="stylesheet" href="{{asset('front/css/cssnewsujet2.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/bootstrap/css/v3/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/bootstrap/css/v4/bootstrap-grid.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/owl-carousel/assets/owl.carousel.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/photoswipe/photoswipe.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/photoswipe/default-skin/default-skin.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/select2/css/select2.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('front/css/style.header-spaceship-variant-one.css')}}" media="(min-width: 1200px)">
+	<link
+	rel="stylesheet" href="{{asset('front/css/style.mobile-header-variant-one.css')}}" media="(max-width: 1199px)">
+	<!-- font - fontawesome -->
+	<link rel="stylesheet" href="{{asset('front/vendor/fontawesome/css/all.min.css')}}">
+
+	{{ parent() }}
+{% endblock %}
+{% block body %}
+	<div class="site__body">
+		<div class="block-header block-header--has-breadcrumb block-header--has-title">
+			<div class="container">
+				<div class="block-header__body">
+					<nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+						<ol class="breadcrumb__list">
+							<li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+							<li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+								<a href={{ path('app_sujet_index') }} class="breadcrumb__item-link">Accueil</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--parent">
+								<a href={{ path('app_sujet_messujets') }} class="breadcrumb__item-link">Mes sauvegardes</a>
+							</li>
+							<li class="breadcrumb__title-safe-area" role="presentation"></li>
+						</ol>
+					</nav>
+					{% for message in app.session.flashbag.get('success') %}
+						<div class="alert alert-success">{{ message }}</div>
+					{% endfor %}
+					{% for message in app.session.flashbag.get('error') %}
+						<div class="alert alert-danger">{{ message }}</div>
+					{% endfor %}
+					<h1 class="block-header__title">Mes sauvegardes</h1>
+				</div>
+			</div>
+		</div>
+		<div class="block blog-view blog-view--layout--list">
+			<div class="container">
+				<div class="blog-view__body">
+					<div class="blog-view__item blog-view__item-posts">
+						<div class="block posts-view">
+							<div class="posts-view__list posts-list posts-list--layout--list">
+								<div class="posts-list__body">
+									{% for postssauvegard_ in postssauvegard_s %}
+										<div class="posts-list__item">
+											<div class="post-card post-card--layout--list">
+												<div class="post-card__image">
+													<a href="post-full-width.html">
+														{% if postssauvegard_.sujet.categorie.nomCategorie == "Infrastructure" %}
+															<img src="{{asset('front/images/categories/infra.jpg')}}" alt="Infrastructure image" style="width: 300px; height: 200px;">
+														{% elseif postssauvegard_.sujet.categorie.nomCategorie == "Dons" %}
+															<img src="{{asset('front/images/categories/don.png')}}" alt="Don image" style="width: 300px; height: 200px;">
+														{% elseif postssauvegard_.sujet.categorie.nomCategorie == "Recrutement" %}
+															<img src="{{asset('front/images/rec.jpg')}}" alt="Rec image" style="width: 300px; height: 200px;">
+
+														{% else %}
+															<img src="{{asset('front/images/categories/new.jpg')}}" alt="Default image" style="width: 300px; height: 200px;">
+														{% endif %}
+													</a>
+												</div>
+												<div class="post-card__content">
+													<div class="post-card__category">
+														<a href="blog-classic-right-sidebar.html">{{ postssauvegard_.sujet.categorie }}</a>
+													</div>
+													<div class="post-card__title">
+														<h2>
+															<a href="post-full-width.html">{{ postssauvegard_.sujet.titreSujet }}</a>
+														</h2>
+													</div>
+													<div class="post-card__date">
+														By
+														<a href="#">{{ postssauvegard_.sujet.user.nom }}</a>
+														on
+														{{ postssauvegard_.sujet.dateCreationSujet ? postssauvegard_.sujet.dateCreationSujet|date('Y-m-d') : '' }}
+													</div>
+													<div class="post-card__excerpt">
+														<div class="typography" style="width: 800px; height=100px;">{{ postssauvegard_.sujet.contenuSujet }}</div>
+													</div>
+													{{ include('postssauvegardés/_delete_form.html.twig') }}
+													<style>
+														.btn-details {
+															background-color: #007bff;
+															color: #fff;
+															border: none;
+															padding: 8px 16px;
+															border-radius: 5px;
+															cursor: pointer;
+															font-size: 16px;
+															transition: all 0.2s ease-in-out;
+														}
+
+														.btn-details:hover {
+															background-color: #0062cc;
+															color: #fff;
+															transition: all 0.2s ease-in-out;
+														}
+													</style>
+													<a href={{ path('app_sujet_show', {idSujet: postssauvegard_.sujet.idSujet} ) }} class="btn-details">Afficher détails</a>
+												</div>
+											</div>
+										</div>
+
+									{% endfor %}
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+
+{% endblock %}

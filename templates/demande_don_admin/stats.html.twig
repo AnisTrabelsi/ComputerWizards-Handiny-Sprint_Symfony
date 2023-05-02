@@ -1,0 +1,63 @@
+{% extends 'BaseB.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+
+
+
+
+{% block body %}
+<br><br><br>
+<h1 style="text-align:center;">Statistiques des types de demandes de dons</h1>
+
+<br>
+  <div class="main-content" >
+
+       <div class="main-content" style="width: 50%; margin: auto;">
+                <canvas id="myChart2"></canvas>
+            </div>
+
+            <!-- Importation de Chart.js pour générer le graphique -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js" style="width: 300px; height: 300px;"></script>
+
+            <script>
+                // Récupérer les données passées depuis le contrôleur
+              // fonction pour générer des couleurs aléatoires
+function randomColor() {
+  return '#' + Math.floor(Math.random()*16777215).toString(16);
+}
+
+// Récupérer les données passées depuis le contrôleur
+var data = {{ data_dd|raw }};
+
+// Créer une instance de la classe Chart
+var ctx = document.getElementById('myChart2').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: Object.keys(data),
+        datasets: [{
+            label: 'Nombre de demandes de dons de ce type:',
+            data: Object.values(data),
+            backgroundColor: Object.keys(data).map(function() { return randomColor(); }),
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+            </script>
+
+        </div>
+
+{% endblock %}

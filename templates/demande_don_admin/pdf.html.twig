@@ -1,0 +1,94 @@
+{% block body %}
+<style>
+    body {
+        font-size: 12px;
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    img {
+        max-width: 250px;
+        height: auto;
+    }
+         h1 {
+                text-align: center;
+                font-size: 32px;
+                margin-bottom: 30px;
+            }
+            p {
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 50px;
+            }
+</style>
+       <h1 class="align-center">Bienvenue dans votre application Handiny </h1>
+
+                                <p>Voila la liste des Demandes don</p>
+<br> <br> 
+{% if demandedons|length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                 <th>Utilisateur</th>
+                <th>Type Produit Demandé</th>
+                <th>Justificatif handicapé</th>
+                <th>Remarques</th>
+                <th>Date de demande</th>
+                <th>état</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cl in demandedons %}
+                <tr>
+                <td>{{ cl.idUtilisateur.nom ~" "~cl.idUtilisateur.prenom }}</td>
+                <td>{{ cl.typeProduitDemande }}</td>
+                    
+                    <td>
+                        {% if cl.justificatifHandicap is null %}
+                            Pas d'image insérée
+                        {% else %}
+                             
+                                
+
+                            <br>{{ cl.justificatifHandicap }}
+                        {% endif %}
+                    </td>
+                    <td>{{ cl.remarques }}</td>
+                    <td>{{ cl.dateDemande| date('d/m/Y') }}</td>
+                    <td class="tb-col">
+                      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+                                                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    {% if cl.etat == "En cours" or cl.etat == "en cours"  %}
+        <span class="icon"><i class="fas fa-circle-notch fa-spin" style="color:orange;"> </i></span>
+        <span style="color: orange;">En cours</span>
+    {% elseif cl.etat == "refuse" %}
+        <span class="icon"><i class="fas fa-times-circle" style="color:red;"></i></span>
+        <br>
+        <span style="color: red;">{{ cl.etat }}</span>
+    {% else %}
+        <span class="icon"><i class="fas fa-check-circle" style="color:green;"></i></span>
+        <span style="color: green;">{{ cl.etat }}</span>
+    {% endif %}
+</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Aucun demande don trouvée.</p>
+{% endif %}
+{% endblock %}

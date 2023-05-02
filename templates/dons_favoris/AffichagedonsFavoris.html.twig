@@ -1,0 +1,112 @@
+{% extends 'baseF.html.twig' %}
+{% block body %}
+	<!-- site__body -->
+	<div class="site__body">
+    <!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+<!-- Inclure les fichiers CSS et JavaScript de Toastr -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- Afficher les messages Flash avec Toastr -->
+{% for type, messages in app.session.flashBag.all() %}
+   {% for message in messages %}
+      <script>
+         toastr.{{ type }}('{{ message }}');
+      </script>
+   {% endfor %}
+{% endfor %}
+<style>.flash-messages {
+  position: fixed;
+  bottom: 0;
+  left: 40;
+  right: 250;
+  z-index: 9999;
+}
+</style>
+		<div class="block-header block-header--has-breadcrumb block-header--has-title">
+			<div class="container">
+				<div class="block-header__body">
+					<nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+						<ol class="breadcrumb__list">
+							<li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+							<li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+								<a href="index.html" class="breadcrumb__item-link">Handiny</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--parent">
+								<a href="" class="breadcrumb__item-link">Don</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last" aria-current="page">
+								<span class="breadcrumb__item-link">Favoris</span>
+							</li>
+							<li class="breadcrumb__title-safe-area" role="presentation"></li>
+						</ol>
+					</nav>
+					<h1 class="block-header__title">Mes favoris</h1>
+				</div>
+			</div>
+		</div>
+		<div class="block">
+			<div class="container container--max--xl">
+				<div class="wishlist">
+					<table class="wishlist__table">
+						<thead class="wishlist__head">
+							<tr class="wishlist__row wishlist__row--head">
+								<th class="wishlist__column wishlist__column--head wishlist__column--image">Image</th>
+								<th class="wishlist__column wishlist__column--head wishlist__column--product">Type</th>
+								<th class="wishlist__column wishlist__column--head wishlist__column--stock">Date</th>
+								<th class="wishlist__column wishlist__column--head wishlist__column--price">Description</th>
+								<th class="wishlist__column wishlist__column--head wishlist__column--button"></th>
+                                <th class="wishlist__column wishlist__column--head wishlist__column--button"></th>
+								<th class="wishlist__column wishlist__column--head wishlist__column--remove"></th>
+                                
+							</tr>
+						</thead>
+						<tbody class="wishlist__body">
+                         {% for don in dons %}
+							<tr class="wishlist__row wishlist__row--body">
+								<td class="wishlist__column wishlist__column--body wishlist__column--image">
+									<div class="image image--type--product">
+										<a href="product-full.html" class="image__body">
+											<img class="image__tag" src="{{ asset('uploads/'~ don.imageDon ) }}" alt="">
+										</a>
+									</div>
+								</td>
+								<td class="wishlist__column wishlist__column--body wishlist__column--product">
+									{{don.type}}
+                                   
+								</td>
+								<td class="wishlist__column wishlist__column--body wishlist__column--stock">
+									{{don.dateAjout|date('d/m/Y')}}
+								</td>
+								<td class="wishlist__column wishlist__column--body wishlist__column--price">{{ don.description}}</td>
+								<td class="wishlist__column wishlist__column--body wishlist__column--button">
+									<a href="{{ path('app_don_detail', {'id': don.getIdDon()}) }}"><button type="button" class="btn btn-sm btn-primary">Voir détails</button></a>
+								</td>
+                                <td class="wishlist__column wishlist__column--body wishlist__column--button">
+									<a href="{{ path('app_add_demandedon', {'id': don.getIdDon()}) }}"><button type="button" class="btn btn-sm btn-primary">Réserver</button></a>
+								</td>
+								                  
+								<td class="wishlist__column wishlist__column--body wishlist__column--remove">
+									<button type="button" class="wishlist__remove btn btn-sm btn-muted btn-icon">
+										<a href="{{ path('app_favoris_dons_delete', {'id': don.getIdDon()}) }}"><svg width="12" height="12">
+											<path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
+												c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
+												C11.2,9.8,11.2,10.4,10.8,10.8z"/>
+										</svg></a>
+									</button>
+
+                                    
+								</td>
+							</tr>
+							 {% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+	<!-- site__body / end -->
+	
+
+			{% endblock %}

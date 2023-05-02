@@ -1,0 +1,163 @@
+{% extends 'baseF.html.twig' %}
+{% block body %}
+	<!-- site__body -->
+	<div class="site__body">
+		<div class="block-space block-space--layout--after-header"></div>
+		<div class="block">
+			<div class="container container--max--xl">
+				<div class="row">
+					<div class="col-12 col-lg-3 d-flex">
+						<div class="account-nav flex-grow-1">
+							<h4 class="account-nav__title">Navigation</h4>
+							<ul class="account-nav__list">
+								<li class="account-nav__item">
+									<a href="{{path('app_list_don')}}">Liste des dons </a>
+								</li>
+								<li class="account-nav__item account-nav__item--active">
+									<a  href="{{path('app_list_demandedon')}}">Vos demandes de dons</a>
+								</li>
+					
+								<li class="account-nav__item">
+									<a href="{{path('app_add_don')}}">Ajouter un don</a>
+								</li>
+
+								<li class="account-nav__item">
+									<a href="{{path('app_list_mesdon')}}">Mes dons</a>
+								</li>
+
+								<li class="account-nav__divider" role="presentation"></li>
+								<li class="account-nav__item">
+									<a href="account-login.html">Se déconnecter</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+						<div class="card">
+							<div class="card-header">
+								<h5>Liste de demandes de dons</h5>
+							</div>
+							<div class="card-divider"></div>
+							<div class="card-table">
+								<div class="">
+                                {% if demandedons|length > 0 %}
+									<table>
+										<thead>
+											<tr>
+											 <th>Type Produit Demandé</th>
+                    <th>Justificatif handicapé</th>
+                    <th>Remarques</th>
+                    <th>Date de demande</th>
+                    <th>état</th>
+                    <th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											    {% for cl in demandedons %}
+                    <tr>
+                        <td>{{ cl.typeProduitDemande }}</td>
+                        <td>
+                            {% if cl.justificatifHandicap is null %}
+                                Pas d'image insérée
+                            {% else %}
+                                <img src="{{ asset('uploads/'~ cl.justificatifHandicap ) }}" width="150" height="150">
+                                    <br>{{ cl.justificatifHandicap }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ cl.remarques }}</td>
+                                <td>{{ cl.dateDemande| date('d/m/Y')  }}</td>
+                                <td>
+                                 {% if cl.etat == "En cours" or cl.etat == "en cours"  %}
+        <span class="icon"><i class="fas fa-circle-notch fa-spin" style="color:orange;"> </i></span>
+        <span style="color: orange;">En cours</span>
+    {% elseif cl.etat == "refuse" %}
+        <span class="icon"><i class="fas fa-times-circle" style="color:red;"></i></span>
+        <br>
+        <span style="color: red;">{{ cl.etat }}</span>
+    {% else %}
+        <span class="icon"><i class="fas fa-check-circle" style="color:green;"></i></span>
+        <span style="color: green;">{{ cl.etat }}</span>
+    {% endif %}
+                                <td>
+
+                         <a href="{{ path('app_remove_demandedon', {'id':cl.idDemandeDon}) }}" class="btn btn-danger" style="background-color: red; border-color: red;">
+    <i class="fas fa-trash"></i> Supprimer
+</a>
+<br><br>
+<a href="{{ path('app_update_demandedon', {'id':cl.idDemandeDon}) }}" class="btn btn-primary" style="background-color: green; border-color: green;">
+    <i class="fas fa-edit"></i> Modifier
+</a>
+<br><br>
+<a href="{{ path('qr', {'id':cl.idDemandeDon}) }}" class="btn btn-custom">
+    <i class="fas fa-qrcode"></i> QR Code 
+</a>
+
+<style>
+.btn-custom {
+background-color: #87CEEB ;
+border-color: #87CEEB;
+}
+</style>
+ 
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+										</tbody>
+									</table>
+                                     
+                <!-- affichage des liens de pagination -->
+            {% else %}
+            <style>
+.no-results {
+    text-align: center;
+}
+</style>
+              <div class="no-results">
+    <p>Aucune demande don trouvée.</p>
+</div>
+
+
+            {% endif %}
+
+								</div>
+							</div>
+							<div class="card-divider"></div>
+							<div class="card-footer">
+								 {{ knp_pagination_render(demandedons) }} 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+	<!-- site__body / end -->
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- Afficher les messages Flash avec Toastr -->
+{% for type, messages in app.session.flashBag.all() %}
+   {% for message in messages %}
+      <script>
+         toastr.{{ type }}('{{ message }}');
+      </script>
+   {% endfor %}
+{% endfor %}
+<style>.flash-messages {
+  position: fixed;
+  bottom: 0;
+  left: 40;
+  right: 250;
+  z-index: 9999;
+}
+/* Personnalisation des messages d'erreur Toastr */
+.toast-error {
+  background-color: red;
+}
+
+</style>
+{% endblock %}

@@ -1,0 +1,465 @@
+{% extends 'baseF.html.twig' %}
+
+{% block body %}
+
+	<div class="site__body">
+		<div class="block-header block-header--has-breadcrumb block-header--has-title">
+			<div class="container">
+				<div class="block-header__body">
+					<nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+						<ol class="breadcrumb__list">
+							<li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+							<li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+								<a href="index.html" class="breadcrumb__item-link">Home</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--parent">
+								<a href="#" class="breadcrumb__item-link">Dons</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last" aria-current="page">
+								<span class="breadcrumb__item-link">List</span>
+							</li>
+							<li class="breadcrumb__title-safe-area" role="presentation"></li>
+						</ol>
+					</nav>
+
+				</div>
+			</div>
+		</div>
+		<div class="block-split block-split--has-sidebar">
+			<div class="container">
+				<div class="block-split__row row no-gutters">
+					<div class="block-split__item block-split__item-sidebar col-auto">
+						<div class="sidebar sidebar--offcanvas--mobile">
+							<div class="sidebar__backdrop"></div>
+							<div class="sidebar__body">
+								<div class="sidebar__header">
+									<div class="sidebar__title">Filters</div>
+									<button class="sidebar__close" type="button">
+										<svg width="12" height="12">
+											<path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
+																																																																			c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
+																																																																			C11.2,9.8,11.2,10.4,10.8,10.8z"/>
+										</svg>
+									</button>
+
+
+								</div>
+							
+
+	<input type="text" id="search" name="search" class="form-control"
+placeholder="Search">
+<style>
+#search {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 270px;
+  margin-bottom: 10px;
+}
+
+#search:focus {
+  outline: none;
+  border-color: #6d9dc5;
+  box-shadow: 0 0 5px rgba(109, 157, 197, 0.5);
+}
+
+</style>
+								<div class="sidebar__content">
+									<div class="widget widget-filters widget-filters--offcanvas--mobile" data-collapse data-collapse-opened-class="filter--opened">
+										<div class="widget__header widget-filters__header">
+											<h4>Filtres</h4>
+										</div>
+										<div class="widget-filters__list">
+											
+											
+										<div class="widget-filters__item">
+	<div class="filter filter--opened" data-collapse-item>
+		<button type="button" class="filter__title" data-collapse-trigger>
+			Date de début et de fin
+			<span class="filter__arrow">
+				<svg width="12px" height="7px">
+					<path d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z"/>
+				</svg>
+			</span>
+		</button>
+		<div class="filter__body" data-collapse-content>
+			<div class="filter__container">
+
+				<div class="filter-price">
+					<div class="filter-price__slider">
+						date de debut :<input type="date" id="start-date" class="filter-price__min-value"> <br> <br>
+						date de fin : <input type="date" id="end-date" class="filter-price__max-value">
+					</div>
+					<div class="filter-price__title-button">
+						
+						<style>
+						.filter-price__title .filter-price__min-display {
+	border-right: 1px solid red;
+	padding-right: 60px;
+}
+
+.filter-price__title span {
+	color: red;
+}
+
+.filter-price__min-value,
+.filter-price__max-value {
+	background-color: #f2f2f2;
+	border: none;
+	border-radius: 4px;
+	padding: 8px;
+	margin: 0 10px;
+}
+
+.filter-price__title-button {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.filter-price__button {
+	background-color: #dc3545;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	margin-left: 20px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.filter-price__button:hover {
+	background-color: #c82333;
+}
+
+
+
+						</style>
+						<button type="button" id="filter-button0" class="btn btn-primary btn-sm">Filtrer</button>
+					</div>
+				</div>
+		
+
+  <script>
+
+    $(document).ready(function() {
+     $('#filter-button0').on('click', function() {
+        var startDate = $('#start-date').val();
+        var endDate = $('#end-date').val();
+//var selectedField = $('#selected-field').val();
+        $.ajax({
+          type: 'GET',
+          url: '{{ path('app_list_don') }}',
+          data: {
+            startDate: startDate,
+            endDate: endDate
+			//selectedField: selectedField
+          },
+          success: function (response) {
+            console.log(startDate);
+            console.log(endDate);
+               $('#dons-container').fadeOut(500, function() {
+          $(this).html(response).fadeIn(500);
+        });
+          },
+          error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr.responseText);
+          }
+        });
+      });
+    });
+
+  </script>
+
+
+
+
+
+															</script>
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="widget-filters__item">
+												<div class="filter filter--opened" data-collapse-item>
+													<button type="button" class="filter__title" data-collapse-trigger>
+														Type de dons 
+														<span class="filter__arrow">
+															<svg width="12px" height="7px">
+																<path d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z"/>
+															</svg>
+														</span>
+													</button>
+													<div class="filter__body" data-collapse-content>
+														<div class="filter__container">
+															<div class="filter-list">
+																<div class="filter-list__list">
+																<form id="filter-form_type" method="post" action="{{ path('app_list_don') }}">
+    {% for type in types %}
+        <label class="filter-list__item">
+            <span class="filter-list__input input-checkbox">
+                <span class="input-checkbox__body">
+                    <input class="input-checkbox__input" name="types[]" type="checkbox" value="{{type}}">
+                    <span class="input-checkbox__box"></span>
+                </span>
+            </span>
+            <span class="filter-list__title">{{ type }}</span>
+        </label>
+    {% endfor %}
+    <button type="button" id="filter-button" class="btn btn-primary">Filtrer</button>
+	
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#filter-button').on('click', function() {
+        // Récupérer les valeurs des cases cochées
+        var types = [];
+        $('input[name="types[]"]:checked').each(function() {
+            types.push($(this).val());
+        });
+
+        // Envoi de la requête AJAX
+        $.ajax({
+            url: '{{ path('app_list_don') }}',
+            type: 'GET',
+            data: { types: types },
+            success: function(response) {
+                console.log("okkk type");
+                $('#dons-container').fadeOut(500, function() {
+          $(this).html(response).fadeIn(500);
+        });
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+});
+</script>
+	
+  <script>
+$(document).ready(function() {
+  $('#search').on('input', function() {
+    // Récupération de la valeur de la recherche
+    var searchValue = $(this).val();
+
+    // Envoi de la requête AJAX
+    $.ajax({
+      url: '{{ path('app_list_don') }}',
+      type: 'GET',
+      data: { search: searchValue },
+      success: function(response) {
+        console.log("okkk search");
+        // Animation du contenu de l'élément "dons-container"
+        $('#dons-container').fadeOut(500, function() {
+          $(this).html(response).fadeIn(500);
+        });
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        console.log(xhr.responseText);
+      }
+    });
+  });
+});
+
+    </script>
+
+
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="widget-filters__item">
+												<div class="filter filter--opened" data-collapse-item>
+													<button type="button" class="filter__title" data-collapse-trigger>
+														Les dons à afficher : 
+														<span class="filter__arrow">
+															<svg width="12px" height="7px">
+																<path d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z"/>
+															</svg>
+														</span>
+													</button>
+													<div class="filter__body" data-collapse-content>
+														<div class="filter__container">
+															<div class="filter-rating">
+																<ul class="filter-rating__list">
+																	<div class="radio-buttons">
+																	<style>
+																	
+																	</style>
+  <label >
+    <input type="radio"  name="button" value="1">
+    <span class="checkmark"></span>
+    Tous les dons
+  </label>
+  <br>
+  <label >
+    <input type="radio"  name="button" value="np" >
+    <span class="checkmark"></span>
+     à demander
+  </label>
+</div>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+										</div>
+										<div class="widget-filters__actions d-flex">
+											<button id="button0" class="btn btn-primary btn-sm">Filtrer</button>
+											
+											
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block-split__item block-split__item-content col-auto">
+						<div class="block">
+							<div class="products-view">
+								<div class="products-view__options view-options view-options--offcanvas--mobile">
+									<div class="view-options__body">
+										<button type="button" class="view-options__filters-button filters-button">
+											<span class="filters-button__icon">
+												<svg width="16" height="16">
+													<path d="M7,14v-2h9v2H7z M14,7h2v2h-2V7z M12.5,6C12.8,6,13,6.2,13,6.5v3c0,0.3-0.2,0.5-0.5,0.5h-2
+																																																																															C10.2,10,10,9.8,10,9.5v-3C10,6.2,10.2,6,10.5,6H12.5z M7,2h9v2H7V2z M5.5,5h-2C3.2,5,3,4.8,3,4.5v-3C3,1.2,3.2,1,3.5,1h2
+																																																																															C5.8,1,6,1.2,6,1.5v3C6,4.8,5.8,5,5.5,5z M0,2h2v2H0V2z M9,9H0V7h9V9z M2,14H0v-2h2V14z M3.5,11h2C5.8,11,6,11.2,6,11.5v3
+																																																																															C6,14.8,5.8,15,5.5,15h-2C3.2,15,3,14.8,3,14.5v-3C3,11.2,3.2,11,3.5,11z"/>
+												</svg>
+											</span>
+											<span class="filters-button__title">Filters</span>
+											<span class="filters-button__counter">3</span>
+										</button>
+										<div class="view-options__layout layout-switcher">
+											<div class="layout-switcher__list">
+												<button type="button" class="layout-switcher__button layout-switcher__button--active" data-layout="grid" data-with-features="false">
+													<svg width="16" height="16">
+														<path d="M15.2,16H9.8C9.4,16,9,15.6,9,15.2V9.8C9,9.4,9.4,9,9.8,9h5.4C15.6,9,16,9.4,16,9.8v5.4C16,15.6,15.6,16,15.2,16z M15.2,7
+																																																																																					H9.8C9.4,7,9,6.6,9,6.2V0.8C9,0.4,9.4,0,9.8,0h5.4C15.6,0,16,0.4,16,0.8v5.4C16,6.6,15.6,7,15.2,7z M6.2,16H0.8
+																																																																																					C0.4,16,0,15.6,0,15.2V9.8C0,9.4,0.4,9,0.8,9h5.4C6.6,9,7,9.4,7,9.8v5.4C7,15.6,6.6,16,6.2,16z M6.2,7H0.8C0.4,7,0,6.6,0,6.2V0.8
+																																																																																					C0,0.4,0.4,0,0.8,0h5.4C6.6,0,7,0.4,7,0.8v5.4C7,6.6,6.6,7,6.2,7z"/>
+													</svg>
+												</button>
+												<button type="button" class="layout-switcher__button" data-layout="grid" data-with-features="true">
+													<svg width="16" height="16">
+														<path d="M16,0.8v14.4c0,0.4-0.4,0.8-0.8,0.8H9.8C9.4,16,9,15.6,9,15.2V0.8C9,0.4,9.4,0,9.8,0l5.4,0C15.6,0,16,0.4,16,0.8z M7,0.8
+																																																																																					v14.4C7,15.6,6.6,16,6.2,16H0.8C0.4,16,0,15.6,0,15.2L0,0.8C0,0.4,0.4,0,0.8,0l5.4,0C6.6,0,7,0.4,7,0.8z"/>
+													</svg>
+												</button>
+												<button type="button" class="layout-switcher__button" data-layout="list" data-with-features="false">
+													<svg width="16" height="16">
+														<path d="M15.2,16H0.8C0.4,16,0,15.6,0,15.2V9.8C0,9.4,0.4,9,0.8,9h14.4C15.6,9,16,9.4,16,9.8v5.4C16,15.6,15.6,16,15.2,16z M15.2,7
+																																																																																					H0.8C0.4,7,0,6.6,0,6.2V0.8C0,0.4,0.4,0,0.8,0h14.4C15.6,0,16,0.4,16,0.8v5.4C16,6.6,15.6,7,15.2,7z"/>
+													</svg>
+												</button>
+												<button type="button" class="layout-switcher__button" data-layout="table" data-with-features="false">
+													<svg width="16" height="16">
+														<path d="M15.2,16H0.8C0.4,16,0,15.6,0,15.2v-2.4C0,12.4,0.4,12,0.8,12h14.4c0.4,0,0.8,0.4,0.8,0.8v2.4C16,15.6,15.6,16,15.2,16z
+																																																																																					 M15.2,10H0.8C0.4,10,0,9.6,0,9.2V6.8C0,6.4,0.4,6,0.8,6h14.4C15.6,6,16,6.4,16,6.8v2.4C16,9.6,15.6,10,15.2,10z M15.2,4H0.8
+																																																																																					C0.4,4,0,3.6,0,3.2V0.8C0,0.4,0.4,0,0.8,0h14.4C15.6,0,16,0.4,16,0.8v2.4C16,3.6,15.6,4,15.2,4z"/>
+													</svg>
+												</button>
+											</div>
+											
+										</div>
+										<div class="view-options__legend"></div>
+										<div class="view-options__spring">
+											<label for="view-option-sort">Trier par</label>
+											<select id="view-option-sort" name="selectedField">
+												<option value="datecroissant">Date croissant</option>
+												<option value="datedecroissant">Date décroissant</option>
+												<option value="type">Type</option>
+											</select>
+											
+
+
+
+
+										</div>
+										
+
+
+										<script>
+											$(document).ready(function () {
+$('#view-option-sort').on('change', function () {
+var selectedField = $(this).val();
+$.ajax({
+type: 'GET',
+url: '{{ path('app_list_don') }}',
+data: {
+'selectedField': selectedField
+},
+success: function (response) {
+console.log('ok');
+  $('#dons-container').fadeOut(500, function() {
+          $(this).html(response).fadeIn(500);
+        });
+
+},
+error: function (xhr, textStatus, errorThrown) {
+console.log(xhr.responseText);
+}
+});
+});
+});
+
+</script>
+<script>
+
+$(document).ready(function() {
+    $('#button0').on('click', function() {
+        var selectedButtonValue = $('input[name="button"]:checked').val();
+        
+        // Envoi de la requête AJAX
+        $.ajax({
+            url: '{{ path('app_list_don') }}',
+            type: 'GET',
+            data: { 'selectedButtonValue' : selectedButtonValue },
+            success: function(response) {
+                console.log('ok');
+                $('#dons-container').fadeOut(500, function() {
+          $(this).html(response).fadeIn(500);
+        });
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+});
+
+
+										
+										</script>
+
+
+									</div>
+
+								</div>
+
+							</div>
+							{{ include('don/dons.html.twig')}}
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+</div></div>
+{% endblock %}

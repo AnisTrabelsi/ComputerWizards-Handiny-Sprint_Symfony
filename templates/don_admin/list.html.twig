@@ -1,0 +1,202 @@
+{% extends 'baseB.html.twig' %}
+{% block body %}
+  <div class="nk-content">
+                    <div class="container">
+                        <div class="nk-content-inner">
+                            <div class="nk-content-body">
+                                <div class="nk-block-head">
+                                    <div class="nk-block-head-between flex-wrap gap g-2">
+                                        <div class="nk-block-head-content">
+                                            <h2 class="nk-block-title">Liste de dons
+                                                </h1>
+                                                <nav>
+                                                    
+                                                </nav>
+                                        </div>
+                                        <div class="nk-block-head-content">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nk-block">
+                                    <div class="card">
+                                   <div class="search-bar">
+
+
+    <form action="{{ path('app_dons_index_back') }}" method="get">
+    <div class="search-container">
+      <input type="text" name="search" placeholder="Recherche...">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+  </form>
+  <a href="{{ path('dons_stats')}}" class="btn btn-stats btn-custom">
+    <i class="fas fa-chart-pie"></i>  &nbsp; Statistiques
+</a>
+
+</div>
+<style>
+.btn-stats {
+background-color: BLue;
+border-color: Blue;
+color: #FFFFFF;
+margin-left: 10px;
+
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.search-container {
+  display: flex;
+  position: relative;
+  width: 400px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #ccc;
+}
+
+.search-container input[type="text"] {
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.search-container button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 60px;
+  background-color: #5f38f9;
+  color: #fff;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+}
+
+.search-container button i {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.search-container button:hover {
+  background-color: #286090;
+}
+
+</style>
+                                        <table class="datatable-init table" data-nk-container="table-responsive">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="tb-col tb-col-check" data-sortable="false">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="">
+                                                        </div>
+                                                    </th>
+                                                    {% if dons|length > 0 %}
+                                                    <th class="tb-col">
+                                                        <span class="overline-title">Utilisateur</span>
+                                                    </th>
+                                                    <th class="tb-col">
+                                                        <span class="overline-title">Type</span>
+                                                    </th>
+                                                    <th class="tb-col">
+                                                        <span class="overline-title">Image</span>
+                                                    </th>
+                                                 
+                                                    <th class="tb-col tb-col-xl">
+                                                        <span class="overline-title">Description</span>
+                                                    </th>
+                                                    <th class="tb-col tb-col-xl">
+                                                        <span class="overline-title">Date d'ajout</span>
+                                                    </th>
+                                                
+                                                    <th class="tb-col tb-col-end" data-sortable="false">
+                                                        <span class="overline-title">Actions</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                        {% for cl in dons %}
+                                                <tr>
+                                                    <td class="tb-col tb-col-check">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="">
+                                                        </div>
+                                                    </td>
+                                                    <td class="tb-col">
+                                                       {{ cl.idUtilisateur.nom ~" "~ cl.idUtilisateur.prenom }}
+                                                    </td>
+                                                    <td class="tb-col">
+                                                        {{ cl.type }}
+                                                    </td>
+                                                    <td class="tb-col">
+                       
+                                  {% if cl.imageDon is null %}
+                Pas d'image insérée
+                {% else %}
+                <img src="{{ asset('uploads/'~ cl.imageDon ) }}" width="250" height="150">
+                <br>{{ cl.imageDon }}
+                {% endif %}
+                            
+                            </td>
+                        </div>
+                    </td>
+                                                   
+                                                    <td class="tb-col">
+                                                        <span>{{ cl.description }}</span>
+                                                    </td>
+                                                    <td class="tb-col">
+                                                        <span>{{ cl.dateAjout|date('d/m/Y')  }}</span>
+                                                    </td>
+                                                   
+
+                                                    <td class="tb-col tb-col-end">
+                                                        <div class="d-flex justify-content-end gap g-2">
+                                                            <div class="gap-col">
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-icon btn-lighter"
+                                                                    title="Print">
+                                                                 
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M21 7h-6V3h-4v4H3c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h2v4h14v-4h2c.55 0 1-.45 1-1V8c0-.55-.45-1-1-1zm-6 7H9v-2h6v2zm4-4H5V9h14v1z"/>
+</svg>
+
+                                                                </button>
+                                                            </div>
+                                                            <div class="gap-col">
+                                    
+                <a href="{{ path('app_remove_don_admin', {'id':cl.idDon}) }}" class="btn btn-danger">Supprimer </a> <br> <br>
+
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}	
+                                     
+                                            </tbody>
+                                        </table>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                                       <div style="width: 300px; margin: 0 auto;">
+    {{ knp_pagination_render(dons) }} <!-- affichage des liens de pagination -->
+    </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% else %}
+                  <br>
+    <p>Aucun don trouvé.</p>
+{% endif %}
+
+{% endblock %}

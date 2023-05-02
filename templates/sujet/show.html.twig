@@ -1,0 +1,234 @@
+{% extends 'baseF.html.twig' %}
+{% block title %}
+	{{ sujet.titreSujet }}
+{% endblock %}
+
+{% block stylesheets %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<title>Post Full Width — Red Parts</title>
+	<link
+	rel="icon" type="image/png" href="images/favicon.png">
+	<!-- fonts -->
+	<link
+	rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i">
+	<!-- css -->
+	<link rel="stylesheet" href="{{asset('front/vendor/bootstrap/css/v3/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/owl-carousel/assets/owl.carousel.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/photoswipe/photoswipe.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/photoswipe/default-skin/default-skin.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/select2/css/select2.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('front/css/style.mobile-header-variant-one.css')}}" media="(min-width: 1200px)">
+	<link
+	rel="stylesheet" href="css/style.mobile-header-variant-one.css" media="(max-width: 1199px)">
+	<!-- font - fontawesome -->
+	<link rel="stylesheet" href="{{asset('front/vendor/fontawesome/css/all.min.css')}}">
+
+	{{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+	<div class="site__body">
+		<div class="block post-view">
+			<div class="post-view__header post-header post-header--has-image">
+				<div class="post-header__image" style="background-image: url('images/posts/post-1-1903x500.jpg');"></div>
+				<div class="post-header__body">
+					<div class="post-header__categories">
+						<ul class="post-header__categories-list">
+							<li class="post-header__categories-item">
+								<a href={{ path('app_sujet_index')}} class="post-header__categories-link">Se rediriger vers l'accueil</a>
+							</li>
+						</ul>
+					</div>
+					<h1 class="post-header__title">{{ sujet.titreSujet }}</h1>
+					<div class="post-header__meta">
+						<ul class="post-header__meta-list">
+							<li class="post-header__meta-item">
+								By
+								<a href="#" class="post-header__meta-link">{{ sujet.user.nom }}</a>
+							</li>
+							<li class="post-header__meta-item">{{ sujet.dateCreationSujet ? sujet.dateCreationSujet|date('Y-m-d') : '' }}</li>
+							<li class="post-header__meta-item">
+								<a href="#" class="post-header__meta-link">{{ sujet.nbCommentaires }}
+									Commentaires</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="decor post-header__decor decor--type--bottom">
+					<div class="decor__body">
+						<div class="decor__start"></div>
+						<div class="decor__end"></div>
+						<div class="decor__center"></div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="post-view__body">
+					<div class="post-view__item post-view__item-post">
+						<div class="post-view__card post">
+							<div class="blog-view__item blog-view__item-posts">
+								<div class="block posts-view">
+									<div class="posts-view__list posts-list posts-list--layout--classic">
+										<div class="posts-list__body">
+											<div class="posts-list__item">
+												<div class="post-card post-card--layout--grid">
+													<div class="post-card__image">
+														<a href="post-full-width.html">
+
+															{% if sujet.categorie.nomCategorie == "Infrastructure" %}
+																<img src="{{asset('front/images/categories/infra.jpg')}}" alt="Infrastructure image" style="width: 900px; height: 400px;">
+															{% elseif sujet.categorie.nomCategorie == "Dons" %}
+																<img src="{{asset('front/images/categories/don.png')}}" alt="Don image" style="width: 900px; height: 400px;">
+															{% elseif sujet.categorie.nomCategorie == "Recrutement" %}
+																<img src="{{asset('front/images/rec.jpg')}}" alt="Rec image" style="width: 900px; height: 400px;">
+
+															{% else %}
+																<img src="{{asset('front/images/categories/new.jpg')}}" alt="Default image" style="width: 900px; height: 400px;">
+															{% endif %}
+														</a>
+													</div>
+													<div class="post-card__content">
+														<div class="post-card__category">
+															<a href="blog-classic-right-sidebar.html">{{ sujet.categorie }}</a>
+														</div>
+														<div class="post-card__title">
+															<h2>
+																<a href="post-full-width.html">{{ sujet.titreSujet }}</a>
+															</h2>
+														</div>
+														<div class="post-card__date">
+															By
+															<a href="#">{{ sujet.user.nom }}</a>
+															on
+															{{ sujet.dateCreationSujet ? sujet.dateCreationSujet|date('Y-m-d') : '' }}
+														</div>
+														<div class="post-card__excerpt" style="width: 800px;">
+															<div class="typography">{{ sujet.contenuSujet }}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="post__footer">
+								<div class="post__tags tags tags--sm">
+									<div class="tags__list">
+										<a href="#">partager</a>
+										<a href="#">j'aime</a>
+										<a href="#">commenter</a>
+									</div>
+								</div>
+								<div class="post__share-links share-links">
+									<ul class="share-links__list">
+										<li class="share-links__item share-links__item--type--like">
+											<a href="#">Like</a>
+										</li>
+										<li class="share-links__item share-links__item--type--tweet">
+											<a href="#">Tweet</a>
+										</li>
+										<li class="share-links__item share-links__item--type--pin">
+											<a href="#">Pin It</a>
+										</li>
+										<li class="share-links__item share-links__item--type--counter">
+											<a href="#">4K</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="post__author">
+								<div class="post__author-avatar">
+									<img src="images/avatars/avatar-4-70x70.jpg" alt="">
+								</div>
+								<div class="post__author-info">
+									<h5>Le commentaire le plus aimé</h5>
+									{#<div class="post__author-name">{{ mostLikedComment.user.nom  }}</div>#}
+									<div class="post__author-about">{{ mostLikedComment }}</div>
+								</div>
+							</div>
+						</div>
+						<div class="post-view__card">
+							<h2 class="post-view__card-title">Commentaires ({{ sujet.nbCommentaires }})</h2>
+							<div class="post-view__card-body comments-view">
+								<ol class="comments-list comments-list--level--0 comments-view__list">
+									{% for c in sujet.commentaires %}
+										<li class="comments-list__item">
+											<div class="comment">
+												<div class="comment__body">
+													<div class="comment__avatar">
+														<img src="{{asset('front/images/profil.png')}}" alt="" width="40" height="40">
+													</div>
+													<div class="comment__meta">
+														<div class="comment__author">{{ c.user.nom }}</div>
+														<div class="comment__date">{{ c.sujet ? c.datePublication|date('Y-m-d') : '' }}</div>
+													</div>
+													<div class="comment__actions">
+														<a href="{{ path('app_commentaire_edit', {'idCommentaire': c.idCommentaire}) }}" class="btn btn-xs btn-light btn-edit d-inline-block" style="background-color: green; color: white;">Edit</a>
+													</div>
+													<div class="comment__actions">
+														{% include 'commentaire/_delete_form.html.twig' with {'commentaire': c} %}
+													</div>
+													<div class="post__tags tags tags--sm">
+    <button id="like-button-{{ c.idCommentaire }}" class="like-button" data-comment-id="{{ c.idCommentaire }}" data-liked="{{ c.isLiked }}" style="background-color: #f2f2f2; border: none; border-radius: 5px; padding: 10px;">
+        <span class="like-count">{{ c.nbMentions }} Likes</span>
+        <i style="color: #ff0000;" class="fas fa-heart"></i>
+    </button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.like-button').unbind('click').click(function () {
+            var likeButton = $(this);
+            var commentId = likeButton.data('comment-id');
+            var isLiked = likeButton.data('liked');
+            var url = isLiked ? '/commentaire/' + commentId + '/dislike' : '/commentaire/' + commentId + '/like';
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function (response) {
+                    var likeCount = parseInt($('#like-button-' + commentId).find('.like-count').text().split(' ')[0]);
+                    $('#like-button-' + commentId).find('.like-count').text((isLiked ? likeCount - 1 : likeCount + 1) + ' Likes');
+                    likeButton.data('liked', !isLiked);
+                    likeButton.find('i').toggleClass('fas far');
+                },
+                error: function () {
+                    alert('Une erreur est survenue lors de l\'envoi de votre like.');
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+														<div class="comment__content typography">{{ c.contenuCommentaire }}</div>
+														<div class="comment__content typography">
+															<img src="{{ asset('front/images/'~ c.piecejointe ) }}" alt="{{ asset('front/images/' ~ c.piecejointe ) }}" width="80" height="80"/>
+														</div>
+													</div>
+												</div>
+											</li>
+										{% endfor %}
+									</ol>
+									<a href="{{ path('app_commentaire_new', {id: sujet.idSujet}) }}" class="btn btn-primary">Post Comment</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-space block-space--layout--before-footer"></div>
+		</div>
+	{% endblock %}

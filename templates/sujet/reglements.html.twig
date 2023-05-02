@@ -1,0 +1,123 @@
+{% extends 'baseF.html.twig' %}
+
+{% block title %}Règlements
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('front/css/alertify.min.css') }}">
+	<script src="{{ asset('front/js/alertify.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('front/css/default.min.css') }}" />
+	{{ parent() }}
+{% endblock %}
+{% block body %}
+    <div class="reglements">
+    
+	<div class="container">
+		<h1 class="text-center">Règlements du forum</h1>
+<div class="row justify-content-center">
+	<div class="col-md-8">
+		<ol>
+			<li>Respectez les autres membres du forum. Pas d'insultes, de harcèlement ou de discrimination.</li>
+			<li>Les propos racistes, sexistes, homophobes ou discriminatoires de toute nature sont interdits.</li>
+			<li>Pas de spam ou de publicité non sollicitée.</li>
+			<li>Les contenus choquants, violents, ou à caractère pornographique sont interdits.</li>
+			<li>Pas de langage vulgaire, injurieux ou offensant.</li>
+			<li>Le partage de fichiers ou de liens illégaux est interdit.</li>
+			<li>Respectez la propriété intellectuelle des autres. Pas de piratage, de contrefaçon ou de violation de droits d'auteur.</li>
+			<li>Pas de contenu politique ou religieux.</li>
+			<li>Les modérateurs du forum ont le droit de supprimer ou de modifier tout contenu jugé inapproprié.</li>
+			<li>Il est interdit de poster des messages offensants, violents ou discriminatoires.</li>
+			<li>Les spams et les publicités ne sont pas autorisés sur le forum.</li>
+			<li>Le partage de fichiers illégaux est interdit sur le forum.</li>
+			<li>Les membres doivent se comporter de manière mature et respectueuse dans toutes les discussions.</li>
+		</ol>
+	</div>
+</div>
+
+		<hr>
+
+		<form method="GET" action="{{ path('app_reglements_generate_pdf') }}">
+			<div class="form-group form-check">
+				<input type="checkbox" class="form-check-input" id="accept-terms" required>
+				<label class="form-check-label" for="accept-terms">J'accepte les règlements</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Télécharger les règlements en PDF</button>
+		</form>
+		<style>
+			.reglements body {
+				background-color: #f8f9fa;
+				font-family: Arial, sans-serif;
+				font-size: 16px;
+			}
+
+			.reglements .container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 20px;
+				background-color: #ffffff;
+				border-radius: 5px;
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			}
+
+			.reglements h1 {
+				margin-top: 0;
+				color: #343a40;
+				font-size: 32px;
+				font-weight: bold;
+			}
+
+			.reglements ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.reglements li {
+				margin-bottom: 10px;
+				padding-left: 30px;
+				position: relative;
+			}
+
+			.reglements li::before {
+				content: "";
+				width: 10px;
+				height: 10px;
+				background-color: #007bff;
+				position: absolute;
+				top: 6px;
+				left: 0;
+				border-radius: 50%;
+			}
+
+			.reglements .form-group {
+				margin-bottom: 20px;
+			}
+
+			.reglements .form-check-label {
+				font-weight: 500;
+			}
+
+			.reglements .btn-primary {
+				background-color: #007bff;
+				border-color: #007bff;
+				border-radius: 20px;
+				padding: 10px 20px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+
+			.reglements .btn-primary:hover {
+				background-color: #0069d9;
+				border-color: #0062cc;
+			}
+		</style>
+	</div>
+</div>
+{% for type, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+        <script>
+            alertify.notify("{{ message }}", "{{ type }}");
+        </script>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}

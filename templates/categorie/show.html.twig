@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<title>Categorie</title>
+
+{% block body %}
+    <h1>Categorie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdCategorie</th>
+                <td>{{ categorie.idCategorie }}</td>
+            </tr>
+            <tr>
+                <th>NomCategorie</th>
+                <td>{{ categorie.nomCategorie }}</td>
+            </tr>
+            <tr>
+                <th>DateCreationCategorie</th>
+                <td>{{ categorie.dateCreationCategorie ? categorie.dateCreationCategorie|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NbSujets</th>
+                <td>{{ categorie.nbSujets }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_index') }}">back to list</a>
+
+    <a href="{{ path('app_categorie_edit', {'idCategorie': categorie.idCategorie}) }}">edit</a>
+
+    {{ include('categorie/_delete_form.html.twig') }}
+{% endblock %}

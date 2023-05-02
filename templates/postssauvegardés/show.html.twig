@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<title>Postssauvegardés</title>
+
+{% block body %}
+    <h1>Postssauvegardés</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdPostSauvegarde</th>
+                <td>{{ postssauvegard_.idPostSauvegarde }}</td>
+            </tr>
+            <tr>
+                <th>DateAjoutSauvegarde</th>
+                <td>{{ postssauvegard_.dateAjoutSauvegarde ? postssauvegard_.dateAjoutSauvegarde|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_postssauvegard_s_index') }}">back to list</a>
+
+    <a href="{{ path('app_postssauvegard_s_edit', {'idPostSauvegarde': postssauvegard_.idPostSauvegarde}) }}">edit</a>
+
+    {{ include('postssauvegardés/_delete_form.html.twig') }}
+{% endblock %}

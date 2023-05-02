@@ -1,0 +1,69 @@
+{% extends 'baseB.html.twig' %}
+
+
+{% block title %}
+	Nouvelle Catégorie
+{% endblock %}
+{% block body %}
+	
+	<div class="new-categorie">
+	
+		{{ include('categorie/_form.html.twig') }}
+	</div>
+<div class="card widget widget-search">
+		<button class="btn btn-primary d-none d-md-inline-flex" data-bs-toggle="modal" data-bs-target="#addUserModal">
+			<a href={{ path('app_categorie_index') }}><em class="icon ni ni-plus"></em>
+											<span style="color : white">Retourner à la liste de catégories</span></a>
+		</button>
+	</div>
+	<style>
+		/* Définissez la taille de police et la couleur du texte pour le titre !!!!!! */
+		.new-categorie h1 {
+			font-size: 24px;
+			color: #333;
+		}
+
+		/* Ajoutez une marge inférieure au formulaire */
+		.new-categorie form {
+			margin: 100px;
+		}
+
+		/* Ajoutez une bordure aux champs de formulaire */
+		.new-categorie input[type="text"],
+		.new-categorie select {
+			border: 1px solid #ccc;
+			padding: 5px;
+		}
+
+		/* Ajoutez une marge inférieure aux champs de formulaire */
+		.new-categorie input[type="text"],
+		.new-categorie select {
+			margin-bottom: 10px;
+		}
+
+		/* Définissez la couleur de fond et la couleur de texte pour le bouton de sauvegarde */
+		.new-categorie button {
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+
+		/* Définissez un style de survol pour le bouton de sauvegarde */
+		.new-categorie button:hover {
+			background-color: #0062cc;
+		}
+
+		/* Définissez la couleur de texte pour le lien de retour */
+		.new-categorie a {
+			color: #007bff;
+		}
+
+		/* Définissez un style de survol pour le lien de retour */
+		.new-categorie a:hover {
+			text-decoration: none;
+			color: #0056b3;
+		}
+	</style>
+{% endblock %}

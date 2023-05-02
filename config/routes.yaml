@@ -14,3 +14,34 @@ app_user_authentification:
 captcha:
     path: /captcha/{key}
     controller: Gregwar\CaptchaBundle\Controller\CaptchaController::generate
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_commentaire_new:
+    path: /commentaire/sujet/{id}/commentaire/new
+    controller: App\Controller\CommentaireController::new
+
+app_sujet_search:
+    path: /sujet/Rechercher
+    controller: App\Controller\SujetController::search
+    methods: ['GET']
+
+app_sujet_search3:
+    path: /Postssauvegardes/Rechercher
+    controller: App\Controller\PostssauvegardésController::search3
+    methods: ['GET']
+
+app_sujet_show:
+    path: /sujet/{idSujet}
+    controller: App\Controller\SujetController::show
+    methods: ['GET']
+    requirements:
+        idSujet: '\d+'
+
+app_postssauvegard_s_show:
+    path: /Postssauvegardes/{idPostSauvegarde}
+    controller: App\Controller\PostssauvegardésController::show
+    methods: ['GET']
+    requirements:
+        idSujet: '\d+'

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<title>Commentaire index</title>
+
+{% block body %}
+    <h1>Commentaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCommentaire</th>
+                <th>ContenuCommentaire</th>
+                <th>DatePublication</th>
+                <th>NbMentions</th>
+                <th>Piecejointe</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaires %}
+            <tr>
+                <td>{{ commentaire.idCommentaire }}</td>
+                <td>{{ commentaire.contenuCommentaire }}</td>
+                <td>{{ commentaire.datePublication ? commentaire.datePublication|date('Y-m-d') : '' }}</td>
+                <td>{{ commentaire.nbMentions }}</td>
+                <td>{{ commentaire.piecejointe }}</td>
+                <td>
+                    <a href="{{ path('app_commentaire_show', {'idCommentaire': commentaire.idCommentaire}) }}">show</a>
+                    <a href="{{ path('app_commentaire_edit', {'idCommentaire': commentaire.idCommentaire}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

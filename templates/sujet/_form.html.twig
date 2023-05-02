@@ -1,0 +1,321 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+{{ form_start(form) }}
+<div class="create" class="main-content">
+	<div class="create__head">
+		<div class="create__title"><img src="{{asset('front/images/New_Topic.svg')}}" alt="New topic">Créer nouveau sujet</div>
+		<span>Réglements du forum</span>
+	</div>
+	<div class="create__section">
+		<label class="create__label" for="title">Titre de sujet</label>
+		{{ form_widget(form.titreSujet, {'attr': {'class': 'form-control'}}) }}
+		<div style="color: red;font-size: 14px;">
+			{{ form_errors(form.titreSujet) }}
+		</div>
+	</label>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="create__section">
+			<label class="create__label" for="category">Sélectionnez la catégorie</label>
+			{{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+			<div style="color: red;font-size: 14px;">
+				{{ form_errors(form.categorie) }}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="create__section create__textarea">
+	<label class="create__label" for="description">Description du sujet</label>
+	<div class="create__textarea-head" style=" width: 100%;">
+		<span>
+			<i class="icon-Quote"></i>
+		</span>
+		<span>
+			<i class="icon-Bold"></i>
+		</span>
+		<span>
+			<i class="icon-Italic"></i>
+		</span>
+		<div class="create__textarea-separate"></div>
+		<span>
+			<i class="icon-Share_Topic"></i>
+		</span>
+		<span>
+			<i class="icon-BlockQuote"></i>
+		</span>
+		<span>
+			<i class="icon-Performatted"></i>
+		</span>
+		<span>
+			<i class="icon-Upload_Files"></i>
+		</span>
+		<span class="create__textarea-separate"></span>
+		<span>
+			<i class="icon-Bullet_List"></i>
+		</span>
+		<span>
+			<i class="icon-heading"></i>
+		</span>
+		<span>
+			<i class="icon-Horizontal_Line"></i>
+		</span>
+		<span>
+			<i class="icon-Emoticon"></i>
+			<div id="emoji-container"></div>
+		</span>
+		<span>
+			<i class="icon-Settings"></i>
+		</span>
+		<span>
+			<i class="icon-Color_Picker"></i>
+			<div id="couleur-container"></div>
+		</span>
+		<div id="boutonEffacer" class="create__textarea-btn">
+			<a href="#" class="btn">Effacer</a>
+		</div>
+	</div>
+	{{ form_widget(form.contenuSujet, {'attr': {'class': 'form-control', 'contenteditable': 'true'}}) }}
+	<div style="color: red;font-size: 14px;">
+		{{ form_errors(form.contenuSujet) }}
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		// Sélectionnez le bouton Effacer
+				const clearButton = document.querySelector('#boutonEffacer');
+		
+				// Sélectionnez tous les champs de formulaire que vous souhaitez effacer
+				const formFields = document.querySelectorAll('#{{ form.contenuSujet.vars.id }}');
+		
+				// Ajoutez un écouteur d'événements au bouton Effacer
+				clearButton.addEventListener('click', function () { // Parcourez tous les champs de formulaire et effacez leur contenu
+				formFields.forEach(function (field) {
+				field.value = '';
+				});
+				});
+				$(document).ready(function() {
+					// Sélectionner l'icône de citation
+					$('.icon-Quote').click(function() {
+						// Récupérer le champ de texte
+						let textField = document.getElementById("{{ form.contenuSujet.vars.id }}");
+						
+						// Récupérer le contenu actuel du champ de texte
+						let currentContent = textField.value;
+						
+						// Récupérer la sélection de texte
+						let textSelection = window.getSelection();
+						
+						// Récupérer le contenu de la sélection
+						let selectedText = textSelection.toString();
+						
+						// Ajouter les guillemets à la sélection
+						let quotedText = '"' + currentContent + '"';
+												
+						// Réinsérer le nouveau contenu dans le champ de texte
+						textField.value = quotedText;
+
+						// Afficher le contenu sujet modifié dans la console
+						console.log(newContent);
+					});
+					
+					// Sélectionner l'icône en gras
+					$('.icon-Bold').click(function() {
+						let textField = document.getElementById("{{ form.contenuSujet.vars.id }}");
+
+						// Récupérer la sélection de texte
+						let textSelection = document.getSelection();
+
+						// Appliquer le style de gras à la zone de texte
+						textField.style.fontWeight = 'bold';
+
+						// Afficher le contenu sujet modifié dans la console
+						console.log(textSelection.toString());
+					});		
+		
+					// Sélectionner l'icône en italique
+					$('.icon-Italic').click(function() {
+						// Récupérer le champ de texte
+						let textField = document.getElementById("{{ form.contenuSujet.vars.id }}");
+		
+						// Récupérer la sélection de texte
+						let textSelection = document.getSelection();
+
+						// Appliquer le style d'italique à la zone de texte
+						textField.style.fontStyle = 'italic';
+
+						// Afficher le contenu sujet modifié dans la console
+						console.log(textSelection.toString());
+					});
+
+					// Sélectionner l'icône émogies
+					$('.icon-Emoticon').click(function() {
+						// Créer un tableau d'objets Emoji
+						const emojis = [
+							{ name: 'smiling face', symbol: '😊' },
+							{ name: 'heart eyes', symbol: '😍' },
+							{ name: 'thinking face', symbol: '🤔' },
+							{ name: 'face with tears of joy', symbol: '😂' },
+							{ name: 'thumbs up', symbol: '👍' },
+							{ name: 'raised hands', symbol: '🙌' },
+						];
+
+						// Créer un élément div pour le clavier d'émoticônes
+						const emojiKeyboard = document.createElement('div');
+						emojiKeyboard.classList.add('emoji-keyboard');
+
+						// Ajouter un bouton pour chaque émoticône
+						emojis.forEach(emoji => {
+							const button = document.createElement('button');
+							button.innerText = emoji.symbol;
+							button.addEventListener('click', () => {
+							let textField = document.getElementById("{{ form.contenuSujet.vars.id }}");
+							textField.value += emoji.symbol;
+							});
+							emojiKeyboard.appendChild(button);
+						});
+
+						 // Récupérer la div pour le clavier d'émoticônes
+						let emojiContainer = document.getElementById('emoji-container');
+
+						// Si le clavier d'émoticônes est déjà affiché, le masquer et supprimer son contenu
+						if (emojiContainer.style.display === 'block') {
+							emojiContainer.style.display = 'none';
+							emojiContainer.innerHTML = '';
+						}
+						// Sinon, afficher le clavier d'émoticônes et ajouter son contenu à la div
+						else {
+							emojiContainer.style.display = 'block';
+							emojiContainer.appendChild(emojiKeyboard);
+						}
+					});
+					
+					$('.icon-heading').click(function() {
+						let textField = document.getElementById("{{ form.contenuSujet.vars.id }}");
+
+						// Récupérer le contenu de la zone de texte et le mettre en majuscules
+						let upperCaseText = textField.value.toUpperCase();
+
+						// Remplacer le contenu de la zone de texte par le texte en majuscules
+						textField.value = upperCaseText;
+
+						// Afficher le contenu sujet modifié dans la console
+						console.log(upperCaseText);
+					});
+
+					// Sélectionner les couleurs
+					$('.icon-Color_Picker').click(function() {
+						let textField = document.getElementById("{{ form.contenuSujet.vars.id }}");
+
+						// Récupérer le contenu de la zone de texte et le mettre en majuscules
+						textField.style.color="blue";
+					});
+
+				});
+		
+			</script>
+		
+		</div>
+		<div class="create__section">
+			<label class="create__label" for="tags">Ajouter Tags</label>
+			{{ form_widget(form.tags, {'attr': {'class': 'form-control'}}) }}
+			<div style="color: red;font-size: 14px;">
+				{{ form_errors(form.tags) }}
+			</div>
+		</div>
+		<div class="create__advanced">
+			<div class="row">
+				<div class="col-lg-4 col-xl-4">
+					<div class="create__section">
+						<label class="create__label">Qui peut voir ?</label>
+						<div class="create__radio">
+							<label class="create__box">
+								<label class="custom-radio">
+									<input type="radio" name="etat" value="ouvert" checked="checked">
+									<i></i>
+								</label>
+								<span>Ouvert</span>
+							</label>
+							<label class="create__box">
+								<label class="custom-radio">
+									<input type="radio" name="etat" value="ferme">
+									<i></i>
+								</label>
+								<span>Fermé</span>
+							</label>
+							<label class="create__box">
+								<label class="custom-radio">
+									<input type="radio" name="etat" value="bloque">
+									<i></i>
+								</label>
+								<span>Bloqué</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-xl-3">
+					<div class="create__section">
+						<label class="create__label">Partager ?</label>
+						<div class="create__radio">
+							<label class="create__box">
+								<label class="custom-checkbox">
+									<input type="checkbox" name="share-social" checked="checked">
+									<i></i>
+								</label>
+								<a href="#" onclick="shareOnFacebook()"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
+							</label>
+							<label class="create__box">
+								<label class="custom-checkbox">
+									<input type="checkbox" name="share-social" checked="checked">
+									<i></i>
+								</label>
+								<a href="#" onclick="shareOnTwitter()"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+							</label>
+							<label class="create__box">
+								<label class="custom-checkbox">
+									<input type="checkbox" name="share-social">
+									<i></i>
+								</label>
+								<a href="#" onclick="shareOnLinkedIn()"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+							</label>
+							<script>
+								function shareOnFacebook() {
+									var publicationContenu = document.getElementById("{{ form.contenuSujet.vars.id }}").value;
+									var encodedContenu = encodeURIComponent(publicationContenu);
+
+									var shareUrl = "https://www.facebook.com/dialog/share?app_id=160291406462337&display=popup";
+									shareUrl += "&href=" + encodeURIComponent("http://127.0.0.1:8000/publication/afficher/" + publicationContenu);
+									shareUrl += "&quote=" + encodedContenu;
+
+									window.open(shareUrl, '_blank');	
+								}
+								function shareOnLinkedIn() {
+									var publicationContenu = document.getElementById("{{ form.contenuSujet.vars.id }}").value;
+									var encodedContenu = encodeURIComponent(publicationContenu);
+
+									var shareUrl = "https://www.linkedin.com/sharing/share-offsite/?url=";
+									shareUrl += encodeURIComponent("http://127.0.0.1:8000/publication/afficher/" + publicationContenu);
+									shareUrl += "&title=" + encodedContenu;
+
+									window.open(shareUrl, '_blank');    
+								}
+
+								function shareOnTwitter() {
+									var publicationContenu = document.getElementById("{{ form.contenuSujet.vars.id }}").value;
+									var encodedContenu = encodeURIComponent(publicationContenu);
+
+									var shareUrl = "https://twitter.com/intent/tweet?";
+									shareUrl += "url=" + encodeURIComponent("http://127.0.0.1:8000/publication/afficher/" + publicationContenu);
+									shareUrl += "&text=" + encodedContenu;
+
+									window.open(shareUrl, '_blank');    
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="create__footer">
+			<button class="create__btn-cansel btn" style="background-color: #3366cc; color: #fff;">{{ button_label|default('Valider') }}</button>
+		<a href="{{ path('app_sujet_index') }}" class="create__btn-cancel btn" style="background-color: #ccc; color: #333;">Annuler</a>
+		</div></div>
+	{{ form_end(form) }}

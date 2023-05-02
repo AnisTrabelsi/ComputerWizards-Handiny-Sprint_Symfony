@@ -8,6 +8,7 @@ parameters:
     qr_directory: '%kernel.project_dir%/public/qr'
 
     voiture_images_directory: '%kernel.project_dir%/public/front/images/voitures'
+    image_directory: 'C:/xampp8.1/htdocs/handinyweb - Copie/public/front/images'
 services:
     # Alias for Gregwar/Captcha/CaptchaBuilder
     Gregwar\Captcha\CaptchaBuilder:

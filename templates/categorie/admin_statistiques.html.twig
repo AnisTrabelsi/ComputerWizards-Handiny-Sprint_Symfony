@@ -1,0 +1,128 @@
+{% extends 'baseB.html.twig' %}
+
+
+{% block body %}
+<br><br><br>
+ <h1>Statistiques des catégories les plus populaires</h1>
+
+    <div style="width: 80%; margin: auto;">
+        <canvas id="categoriesChart"></canvas>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Récupérer les données passées depuis le contrôleur
+        var categories = {{ categories|raw }};
+        var sujets = {{ sujets|raw }};
+
+        // Définir un tableau de couleurs pour les catégories
+        var colors = [
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 205, 86, 0.6)',
+        ];
+
+        // Créer un objet Chart pour afficher les données sous forme de graphique
+        var chart = new Chart(document.getElementById('categoriesChart'), {
+            type: 'bar',
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: 'Nombre de sujets par catégorie',
+                    data: sujets,
+                    backgroundColor: colors.slice(0, categories.length),
+                    borderColor: colors.slice(0, categories.length),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Catégories les plus populaires'
+                }
+            }
+        });
+    </script>
+
+<h1>Statistiques des commentaires par sujet</h1>
+<div style="width: 50%; margin: auto;">
+    <canvas id="sujetsChart"></canvas>
+</div>
+<script>
+    var data2 = {{ data2|raw }};
+    // Créer un objet Chart pour afficher les données sous forme de graphique
+    var chart = new Chart(document.getElementById('sujetsChart'), {
+        type: 'pie',
+        data: {
+            labels: data2.map(sujet => sujet.label),
+            datasets: [{
+                label: 'Nombre de commentaires par sujet',
+                data: data2.map(sujet => sujet.value),
+                backgroundColor: colors.slice(0, data2.length),
+                borderColor: colors.slice(0, data2.length),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+            title: {
+                display: true,
+                text: 'Statistiques des commentaires par sujet'
+            }
+        }
+    });
+</script>
+<h1>Activité des sujets</h1>
+<div style="width: 50%; margin: auto;">
+    <canvas id="sujetsActifsChart"></canvas>
+</div>
+<script>
+    var data3 = {{ data3|raw }};
+    // Créer un objet Chart pour afficher les données sous forme de graphique
+    var chart = new Chart(document.getElementById('sujetsActifsChart'), {
+        type: 'pie',
+        data: {
+            labels: data3.map(sujet => sujet.label),
+            datasets: [{
+                label: 'Sujet par état d\'activité',
+                data: data3.map(sujet => sujet.value),
+                backgroundColor: colors.slice(0, data3.length),
+                borderColor: colors.slice(0, data3.length),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+            title: {
+                display: true,
+                text: 'Activité des sujets'
+            }
+        }
+    });
+</script>
+
+{% endblock %}

@@ -45,3 +45,7 @@ app_postssauvegard_s_show:
     methods: ['GET']
     requirements:
         idSujet: '\d+'
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+

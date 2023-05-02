@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ReservationChauffeur{% endblock %}
+
+{% block body %}
+    <h1>Edit ReservationChauffeur</h1>
+
+    {{ include('reservation_chauffeur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_reservation_chauffeur_index') }}">back to list</a>
+
+    {{ include('reservation_chauffeur/_delete_form.html.twig') }}
+{% endblock %}

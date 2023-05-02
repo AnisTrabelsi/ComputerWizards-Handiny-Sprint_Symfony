@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * ReservationChauffeur
@@ -26,6 +28,7 @@ class ReservationChauffeur
      * @var int
      *
      * @ORM\Column(name="duree_service", type="integer", nullable=false)
+     * @Assert\NotBlank
      */
     private $dureeService;
 
@@ -33,6 +36,7 @@ class ReservationChauffeur
      * @var \DateTime
      *
      * @ORM\Column(name="date_prise_en_charge", type="date", nullable=false)
+     * @Assert\NotBlank
      */
     private $datePriseEnCharge;
 
@@ -40,6 +44,7 @@ class ReservationChauffeur
      * @var string
      *
      * @ORM\Column(name="description_demande", type="string", length=50, nullable=false)
+     * @Assert\NotBlank
      */
     private $descriptionDemande;
 

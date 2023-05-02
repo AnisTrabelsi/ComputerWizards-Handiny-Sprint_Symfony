@@ -560,7 +560,11 @@ public function DonId($id, NormalizerInterface $normalizer, DonRepository $repo)
 
 
 #[Route("/AdddonJSON", name: "addDonjson")]
+<<<<<<< Updated upstream
 public function AdddonJSON(Request $req,   NormalizerInterface $Normalizer,ManagerRegistry $doctrine,UserRepository $repo)
+=======
+public function AdddonJSON(Request $req,   NormalizerInterface $Normalizer,ManagerRegistry $doctrine,UserRepository $repo,UserRepository $repou)
+>>>>>>> Stashed changes
 {
 
     $em =$doctrine->getManager();
@@ -569,7 +573,11 @@ public function AdddonJSON(Request $req,   NormalizerInterface $Normalizer,Manag
     $don->setImageDon($req->get('imageDon'));
     $don->setDescription($req->get('description'));
     $don->setDateAjout(new \DateTime('now'));
+<<<<<<< Updated upstream
     $don->setIdUtilisateur($req->get('idUtilisateur'));
+=======
+    $don->setIdUtilisateur($repou->find($req->get('idUtilisateur')));
+>>>>>>> Stashed changes
 
     $em->persist($don);
     $em->flush();
@@ -579,7 +587,11 @@ public function AdddonJSON(Request $req,   NormalizerInterface $Normalizer,Manag
 }
 
 #[Route("/UpdatedonJSON/{id}", name: "updateDonJSON")]
+<<<<<<< Updated upstream
 public function UpdatedonJSON(Request $req, $id, NormalizerInterface $Normalizer,ManagerRegistry $doctrine)
+=======
+public function UpdatedonJSON(Request $req, $id, NormalizerInterface $Normalizer,ManagerRegistry $doctrine,UserRepository $repou)
+>>>>>>> Stashed changes
 {
 
     $em =  $doctrine->getManager();
@@ -588,7 +600,11 @@ public function UpdatedonJSON(Request $req, $id, NormalizerInterface $Normalizer
     $don->setImageDon($req->get('imageDon'));
     $don->setDescription($req->get('description'));
     $don->setDateAjout($req->get('dateAjout'));
+<<<<<<< Updated upstream
     $don->setIdUtilisateur($req->get('idUtilisateur'));
+=======
+    $don->setIdUtilisateur($repou->find($req->get('idUtilisateur')));
+>>>>>>> Stashed changes
 
     $em->flush();
 

@@ -1,0 +1,351 @@
+{% extends 'baseF.html.twig' %}
+{% block title %}
+	Liste de sujets
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+{% block body %}
+	<div class="site__body">
+		<div class="block-header block-header--has-breadcrumb block-header--has-title">
+			<div class="container">
+				<div class="block-header__body">
+					<nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+						<ol class="breadcrumb__list">
+							<li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+							<li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+								<a href={{ path('app_sujet_index') }} class="breadcrumb__item-link">Accueil</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--parent">
+								<a href={{ path('app_sujet_messujets') }} class="breadcrumb__item-link">Mes sujets</a>
+							</li>
+							<li class="breadcrumb__title-safe-area" role="presentation"></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<div class="block blog-view blog-view--layout--classic">
+			<div class="container">
+				<div class="blog-view__body">
+					<div class="blog-view__item blog-view__item-sidebar">
+						<div class="card widget widget-search">
+							<form method="GET" action="{{ path('app_sujet_search') }}">
+								<div class="input-group">
+									<input type="text" name="search" class="form-control rounded-pill" placeholder="Rechercher...">
+									<div class="input-group-append ">
+										<button class="btn btn-primary rounded-pill" type="submit" style=" background-color: #62A960; transition: all 0.2s ease-in-out;">
+											<i class="fas fa-search" style="color: white;"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+
+							<style>
+								/* Style pour le formulaire */
+								.form-group {
+									margin-bottom: 20px;
+								}
+
+								/* Style pour le champ de recherche */
+								.form-control {
+									font-size: 16px;
+									padding: 15px;
+									border-radius: 0;
+									border-color: #ddd;
+								}
+
+								/* Style pour le bouton de recherche */
+								.btn-primary {
+									background-color: #007bff;
+									border-color: #007bff;
+									color: #fff;
+									font-size: 16px;
+									padding: 15px 20px;
+									border-radius: 0;
+								}
+
+								/* Style pour l'icône de recherche */
+								.fa-search {
+									margin-right: 10px;
+								}
+							</style>
+						</div>
+
+						<div class="card widget widget-search">
+							<button class="btn btn-secondary btn-sm">
+								<a href={{ path('app_sujet_new') }}>Créer un nouveau sujet</a>
+							</button>
+						</div>
+						<div class="card widget widget-about-us">
+							<div class="widget__header">
+								<h4>Bienvenue au forum</h4>
+							</div>
+							<div class="widget-about-us__body">
+								<div class="widget-about-us__text">Nous sommes ravis de vous avoir parmi nous et espérons que vous allez apprécier cette communauté où vous pouvez discuter et échanger sur une grande variété de sujets.
+																																																																																																																																																																																																														Nous vous encourageons à lire attentivement
+									<a href="#">les règles du forum</a>
+									pour vous assurer que vous comprenez bien les attentes de la communauté et que vous êtes en mesure de contribuer de manière constructive.
+								</div>
+								<div class="widget-about-us__social-links social-links">
+									<ul class="social-links__list">
+										<li class="social-links__item social-links__item--rss">
+											<a href="https://themeforest.net/user/kos9" target="_blank">
+												<i class="widget-social__icon fas fa-rss"></i>
+											</a>
+										</li>
+										<li class="social-links__item social-links__item--youtube">
+											<a href="https://themeforest.net/user/kos9" target="_blank">
+												<i class="widget-social__icon fab fa-youtube"></i>
+											</a>
+										</li>
+										<li class="social-links__item social-links__item--facebook">
+											<a href="https://themeforest.net/user/kos9" target="_blank">
+												<i class="widget-social__icon fab fa-facebook-f"></i>
+											</a>
+										</li>
+										<li class="social-links__item social-links__item--twitter">
+											<a href="https://themeforest.net/user/kos9" target="_blank">
+												<i class="widget-social__icon fab fa-twitter"></i>
+											</a>
+										</li>
+										<li class="social-links__item social-links__item--instagram">
+											<a href="https://themeforest.net/user/kos9" target="_blank">
+												<i class="widget-social__icon fab fa-instagram"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card widget widget-categories">
+							<div class="widget__header">
+								<h4>Catégories</h4>
+							</div>
+							<ul class="widget-categories__list widget-categories__list--root" data-collapse data-collapse-opened-class="widget-categories__item--open">
+								{% for category in categories %}
+									<li class="widget-categories__item" data-collapse-item>
+										<a href="{{ path('app_sujet_index', {'categoryId': category.idCategorie}) }}" id="active" class="widget-categories__link">{{ category.nomCategorie }}</a>
+									</li>
+								{% endfor %}
+								<script>
+									$(document).ready(function () {
+										var activeButton = null;
+
+										$('.widget-categories__link').click(function () {
+											// Retirer la classe active de l'ancien bouton actif
+											if (activeButton) {
+												activeButton.removeClass('active');
+											}
+
+											// Ajouter la classe active au bouton cliqué
+											$(this).addClass('active');
+
+											// Enregistrer le nouveau bouton actif
+											activeButton = $(this);
+										});
+									});
+								</script>
+
+								<style>
+									.widget-categories__list--root>.widget-categories__item:before {
+										width: 4px;
+										height: 4px;
+										background: currentColor;
+										opacity: .2;
+										top: 13px;
+										left: 2px
+									}
+									.widget-categories__link::before {
+										content: "";
+										display: inline-block;
+										width: 1em;
+										height: 1em;
+										margin-right: 0.5em;
+										border: 1px solid #ccc;
+										border-radius: 3px;
+									}
+
+
+									.widget-categories__list {
+										list-style: none;
+										margin: 0;
+										padding: 0;
+									}
+
+									.widget-categories__item {
+										margin: 10px 0;
+									}
+
+									.widget-categories__link {
+										display: block;
+										padding: 10px;
+										background-color: #f2f2f2;
+										border: 1px solid #ccc;
+										border-radius: 5px;
+										color: #333;
+										text-decoration: none;
+										transition: background-color 2s ease-in-out;
+									}
+
+									.widget-categories__link:hover,
+									.widget-categories__link:focus {
+										background-color: #ccc;
+									}
+
+									.widget-categories__link.active {
+										background-color: green;
+										color: #fff;
+									}
+
+									.widget-categories__link input[type="checkbox"]:checked + ::before {
+										content: "\2713";
+										color: green;
+										font-size: 1.2em;
+										text-align: center;
+										line-height: 1;
+									}
+								</style>
+							</ul>
+						</div>
+						<div class="card widget widget-posts">
+							<div class="widget__header">
+								<h4>Derniers Sujets</h4>
+							</div>
+							<ul class="widget-posts__list">
+								{% for sujet in latest %}
+									<li class="widget-posts__item">
+										<div class="widget-posts__image">
+											<a href="#">
+												<img src="images/posts/post-1-70x70.jpg" alt="">
+											</a>
+										</div>
+										<div class="widget-posts__info">
+											<div class="widget-posts__name">
+												<a href="#">{{ sujet.titreSujet }}</a>
+											</div>
+											<div class="widget-posts__date">{{ sujet.dateCreationSujet ? sujet.dateCreationSujet|date('Y-m-d') : '' }}</div>
+										</div>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+						<div class="widget widget-newsletter">
+							<div class="widget-newsletter__title">
+								<h4>Nouveautés</h4>
+							</div>
+							<div class="widget-newsletter__form">
+								<form action="#">
+									<div class="widget-newsletter__text">Veuillez écrire votre adresse e-mail pour recevoir les dernières nouveautés et pour voir les sujets de la communauté.</div>
+									<input type="text" class="widget-newsletter__email" placeholder="Adresse Email...">
+									<button type="button" class="widget-newsletter__button">Envoyer</button>
+								</form>
+							</div>
+						</div>
+						<div class="card widget-tags widget">
+							<div class="widget__header">
+								<h4>#Tags</h4>
+							</div>
+							<div class="widget-tags__body tags">
+								<div class="tags__list">
+									{% for tag in tags %}
+										<a href="#">{{ tag }}</a>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="blog-view__item blog-view__item-posts">
+						<div class="block posts-view">
+							<div class="posts-view__list posts-list posts-list--layout--classic">
+								<div class="posts-list__body">
+									<a href="{{ path('app_sujet_index', {'sort': 'date_creation'}) }}" class="btn btn-light">
+										<i class="fas fa-sort"></i>
+										Plus récents
+									</a>
+									{% if sujets is empty %}
+										<div class="warning-message">
+											<span class="warning-icon">&#9888;</span>
+											Aucun résultat trouvé pour votre recherche. Veuillez réessayer avec des termes différents.
+										</div>
+									{% else %}
+										{% for sujet in sujets %}
+											{% if loop.index % 3 == 1 %}
+												<div class="row">
+												{% endif %}
+												<div class="posts-list__item">
+													<div class="post-card post-card--layout--grid">
+														<div class="post-card__image">
+															<a href="post-full-width.html">
+																{% if sujet.categorie.nomCategorie == "Infrastructure" %}
+																	<img src="{{asset('front/images/categories/infra.jpg')}}" alt="Infrastructure image" style="width: 300px; height: 200px;">
+																{% elseif sujet.categorie.nomCategorie == "Dons" %}
+																	<img src="{{asset('front/images/categories/don.png')}}" alt="Don image" style="width: 300px; height: 200px;">
+																{% elseif sujet.categorie.nomCategorie == "Recrutement" %}
+																	<img src="{{asset('front/images/rec.jpg')}}" alt="Rec image" style="width: 300px; height: 200px;">
+																{% else %}
+																	<img src="{{asset('front/images/categories/new.jpg')}}" alt="Default image" style="width: 300px; height: 200px;">
+																{% endif %}
+															</a>
+														</div>
+
+														<div class="post-card__content">
+
+															<div class="post-card__category">
+																<a href="blog-classic-right-sidebar.html">{{ sujet.categorie }}</a>
+															</div>
+															<div class="address-card__badge tag-badge tag-badge--theme">{{ sujet.etat }}</div>
+															<div class="post-card__title">
+																<h2>
+																	<a href="post-full-width.html">{{ sujet.titreSujet }}</a>
+																</h2>
+															</div>
+															<div class="post-card__date">
+																By
+																<a href="#">{{ sujet.user.nom }}</a>
+																on
+																{{ sujet.dateCreationSujet ? sujet.dateCreationSujet|date('Y-m-d') : '' }}
+															</div>
+															<div class="post-card__excerpt" style="width: 800px;">
+																<div class="typography">{{ sujet.contenuSujet }}</div>
+															</div>
+															<div class="post-card__more">
+																<a href={{ path('app_sujet_show', {idSujet: sujet.idSujet} ) }} class="btn btn-secondary btn-sm">Afficher détails</a>
+																<a href={{ path('app_sujet_sauvegarder', {idSujet: sujet.idSujet} ) }} class="btn btn-secondary btn-sm">Enregistrer</a>
+															</div>
+														</div>
+													</div>
+												</div>
+												{% if loop.index % 3 == 0 or loop.last %}
+												</div>
+											{% endif %}
+										{% endfor %}
+									{% endif %}
+									<style>
+										.warning-message {
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											background-color: #fdd;
+											padding: 1rem;
+											border-radius: 5px;
+											font-size: 1.2rem;
+											color: #d33;
+										}
+
+										.warning-icon {
+											margin-right: 1rem;
+											font-size: 1.5rem;
+										}
+									</style>
+								</div>
+							</div>
+							{{ include('sujet/paginationsujets.html.twig')}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<title>ReservationVoiture</title>
+
+{% block body %}
+    <h1>ReservationVoiture</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id_reservation_voiture</th>
+                <td>{{ reservation_voiture.idReservationVoiture }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut_reservation</th>
+                <td>{{ reservation_voiture.dateDebutReservation ? reservation_voiture.dateDebutReservation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Etat_demande_reservation</th>
+                <td>{{ reservation_voiture.etatDemandeReservation }}</td>
+            </tr>
+            <tr>
+                <th>Description_reservation</th>
+                <td>{{ reservation_voiture.descriptionReservation }}</td>
+            </tr>
+            <tr>
+                <th>Date_demande_reservation</th>
+                <td>{{ reservation_voiture.dateDemandeReservation ? reservation_voiture.dateDemandeReservation|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_voiture_index') }}">back to list</a>
+
+    <a href="{{ path('app_reservation_voiture_edit', {'id_reservation_voiture': reservation_voiture.id_reservation_voiture}) }}">edit</a>
+
+    {{ include('reservation_voiture/_delete_form.html.twig') }}
+{% endblock %}

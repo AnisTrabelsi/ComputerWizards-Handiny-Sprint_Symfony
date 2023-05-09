@@ -1,0 +1,42 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}, 'class': 'text-center'}) }}
+{{ form_start(form) }}
+<div class="container">
+
+	<div class="card o-hidden border-0 shadow-lg my-5">
+		<div
+			class="card-body p-0">
+			<!-- Nested Row within Card Body -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="p-5">
+						<div class="text-center">
+							<h1 class="h4 text-gray-900 mb-4">Créer une nouvelle catégorie</h1>
+						</div>
+						{{form_start(form,{'attr':{'novalidate':'novalidate' , 'class' : 'user' }})}}
+
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								{% if form_errors(form.nomCategorie) is not empty %}
+									<div class="alert alert-danger">
+										{{ form_errors(form.nomCategorie) }}
+									</div>
+								{% endif %}
+								{{ form_widget(form.nomCategorie,{ 'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nom catégorie' } }) }}
+							</div>
+						</div>
+						{{ form_end(form) }}
+						<hr>
+						<div class="create__footer">
+							<button class="create__btn-cansel btn" style="background-color: #3366cc; color: #fff;">{{ button_label|default('Valider') }}</button>
+							<a href="{{ path('app_categorie_index') }}" class="create__btn-cancel btn" style="background-color: #ccc; color: #333;">Annuler</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+{{ form_end(form) }}

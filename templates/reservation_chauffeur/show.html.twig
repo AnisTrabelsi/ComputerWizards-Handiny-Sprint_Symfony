@@ -1,0 +1,31 @@
+{% extends 'baseB.html.twig' %}
+
+{% block title %}ReservationChauffeur{% endblock %}
+
+{% block body %}
+    <h1>ReservationChauffeur</h1>
+
+    <table class="table">
+        <tbody>
+          
+            <tr>
+                <th>DureeService</th>
+                <td>{{ reservation_chauffeur.dureeService }}</td>
+            </tr>
+            <tr>
+                <th>DatePriseEnCharge</th>
+                <td>{{ reservation_chauffeur.datePriseEnCharge ? reservation_chauffeur.datePriseEnCharge|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionDemande</th>
+                <td>{{ reservation_chauffeur.descriptionDemande }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_chauffeur_index') }}">back to list</a>
+
+    <a href="{{ path('app_reservation_chauffeur_edit', {'idReservationChauffeur': reservation_chauffeur.idReservationChauffeur}) }}">edit</a>
+
+    {{ include('reservation_chauffeur/_delete_form.html.twig') }}
+{% endblock %}

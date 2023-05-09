@@ -1,0 +1,29 @@
+<img src="{{ asset('images/logo.jpg') }}" style="width:100px; height:100px;" alt="Description de votre image">
+{% block title %}<h1>La Liste Des Chauffeurs</h1>{% endblock %}
+<div class="slider-item" style="background-image: url('{{asset('logo.png')}}');"></div>
+<table border="1">
+  <thead>
+    <tr>
+      <th>IdChauffeur</th>
+      <th>cin</th>
+      <th>nom</th>
+      <th>adresse</th>
+      <th>statutDisponibilite</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    {% for Chauffeur in Chauffeur %}
+    <tr>
+      <td>{{ Chauffeur.idChauffeur }}</td>
+      <td>{{ Chauffeur.cin }}</td>
+      <td>{{ Chauffeur.nom }}</td>
+      <td>{{ Chauffeur.adresse }}</td>
+      <td>{{ Chauffeur.statutDisponibilite }}</td>
+    </tr>
+    {% endfor %}
+
+  
+
+  </tbody>
+</table>

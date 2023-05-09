@@ -1,0 +1,60 @@
+
+{% extends 'baseB.html.twig'%}
+{% block title %}COVOITURAGE{% endblock %}
+
+{% block body %}
+    <h1>Covoiturage</h1>
+
+    <table class="table">
+        <tbody>
+            {# <tr>
+                <th>Id</th>
+                <td>{{ covoiturage.id }}</td>
+            </tr> #}
+            {# <tr>
+                <th>Id_cov</th>
+                <td>{{ covoiturage.idCov }}</td>
+            </tr> #}
+           
+            <tr>
+                <th>Depart : </th>
+                <td>{{ covoiturage.depart }}</td>
+            </tr>
+            <tr>
+                <th>Destination : </th>
+                <td>{{ covoiturage.destination }}</td>
+            </tr>
+            <tr>
+                <th>Date_covoiturage : </th>
+                <td>{{ covoiturage.dateCovoiturage ? covoiturage.dateCovoiturage|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Prix :</th>
+                <td>{{ covoiturage.Prix }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de place :</th>
+                <td>{{ covoiturage.nbrplace }}</td>
+            </tr>
+            {# <tr>
+                <th>Nom</th>
+                <td>{{ covoiturage.nom }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ covoiturage.telephone }}</td>
+            </tr> #}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_covoiturage_index') }}">back to list</a> #}
+{# <a href="{{ path('app_reservation_new1', {'id': covoiturage.id}) }}" class="btn btn-primary btn-lg d-flex justify-content-center">Reserver</a> #}
+
+    {# <a href="{{ path('app_covoiturage_edit', {'id': covoiturage.id}) }}">edit</a> #}
+
+   
+<form action="{{ path('app_covoiturage_delete', {'id': covoiturage.id}) }}" method="post" style="display: inline-block;">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger justify-content-center" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+</form>
+{% endblock %}

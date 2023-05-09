@@ -1,0 +1,34 @@
+{% extends 'baseF.html.twig' %}
+{% block title %}
+	Créer nouveau sujet
+{% endblock %}
+{% block stylesheets %}
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	<meta name="keywords" content="HTML5 Template">
+	<meta name="description" content="Responsive HTML5 Template">
+	<meta
+	name="author" content="author.com">
+	<!-- icon -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i">
+
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+
+	<link rel="stylesheet" href="{{asset('front/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/css/cssnewsujet2.css')}}">
+	<link
+	rel="stylesheet" href="{{asset('front/css/cssnewsujet.css')}}">
+	<!-- Vendor -->
+	<link rel="stylesheet" href="{{asset('front/vendor/bootstrap/css/v3/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('front/vendor/bootstrap/css/v4/bootstrap-grid.css')}}">
+
+	{{ parent() }}
+{% endblock %}
+{% block body %}
+
+
+	{{ include('sujet/_form.html.twig') }}
+
+
+{% endblock %}

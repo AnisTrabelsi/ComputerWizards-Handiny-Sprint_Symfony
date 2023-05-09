@@ -1,0 +1,63 @@
+<style>
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+</style>
+{{ form_start(form, {'attr': {'class': 'form-grid', 'novalidate': 'novalidate'}}) }}
+
+<div class="form-group">
+    <table>
+        <tr>
+            <td><label for="profile-phone">{{ form_label(form.date_debut_reservation) }}</label></td>
+            <td>{{ form_widget(form.date_debut_reservation, {'attr': {'class': 'form-control datepicker', 'readonly': 'readonly'}}) }}</td>
+            {% if form_errors(form.date_debut_reservation) %}
+                <td>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ form_errors(form.date_debut_reservation) }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td>{{ form_label(form.date_fin_reservation) }}</td>
+            <td>{{ form_widget(form.date_fin_reservation, {'attr': {'class': 'form-control datepicker', 'readonly': 'readonly'}}) }}</td>
+            {% if form_errors(form.date_fin_reservation) %}
+                <td>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ form_errors(form.date_fin_reservation) }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td>{{ form_label(form.description_reservation) }}</td>
+            <td>{{ form_widget(form.description_reservation, {'attr': {'class': 'form-control', }}) }}</td>
+            {% if form_errors(form.description_reservation) %}
+                <td>
+                    <div class="alert alert-danger alert-dismissible alert-lg" role="alert">
+                        {{ form_errors(form.description_reservation) }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </td>
+            {% endif %}
+        </tr>
+    </table>
+    
+    <td style="text-align: center;">
+        <button class="btn btn-lg btn-primary">{{ button_label|default('Save') }}</button>
+    </td>
+</div>
+
+{{ form_end(form) }}

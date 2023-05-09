@@ -1,0 +1,48 @@
+{% extends 'baseF.html.twig' %}
+
+{% block body %}
+<div style=" margin-top:50px ;margin-left:250px;">
+<a href="#" ><button type="button" class="btn btn-sm btn-outline-danger">Retour au liste</button></a>
+</div>
+<center>
+    <h1 class="mb-3 text-danger">Détails de votre covoiturage</h1>
+    <br>
+    <h5>Veuillez cliquer sur le marqueur pour voir les détails</h5>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet'/>
+    <div id='map' style='width: 75%; height: 450px; margin:20px 200px;'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZmplcmJpIiwiYSI6ImNrdWp6bXJhdTE4MGwyd215bzhpb3c0OGYifQ.jW0ZovMg20DoAaiOtGkPhg';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: [{{ appointment.longitude }}, {{ appointment.latitude }}],
+        zoom: 5
+    });
+
+    // Get the address using an AJAX request to the 'getadress' route
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var address = this.responseText;
+            // Add a custom marker to the map
+            var marker = new mapboxgl.Marker({
+                color: 'red'
+            })
+            .setLngLat([{{ appointment.longitude }}, {{ appointment.latitude }}])
+            .setPopup(new mapboxgl.Popup({ offset: 25 })
+                .setHTML('<ul><li><p>Depart: {{ appointment.depart }}</p></li><li><p>nbrplace: {{ appointment.nbrplace }}</p></li> <li><p>date: {{ appointment.date_covoiturage|date("Y-m-d H:i")  }}</p></li><li><p>Destination: {{ appointment.destination }}</p></li><li><p>Prix: {{ appointment.Prix }}</p><li><p>nom: {{ appointment.nom }}</li></p><li><p>telephone: {{ appointment.telephone }}</p> </li></li><li><p>Address: ' + address + '</p></li></ul>'))
+            .addTo(map);
+        }
+    };
+    xhr.open("GET", "{{ path('getadress', {'lat': appointment.latitude, 'lng': appointment.longitude}) }}", true);
+    xhr.send();
+</script>
+
+
+   <div class ="col-12 text-center"> 
+        <a href="{{ path('app_reservation_new1', {'id': appointment.id}) }}" class="btn btn-success btn-sm ">Reserver</a>
+   </div> 
+</center>    
+{% endblock %}

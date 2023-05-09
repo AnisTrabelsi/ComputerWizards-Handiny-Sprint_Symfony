@@ -1,0 +1,20 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+{{ form_start(form) }}
+<div class="form-group">
+		<label for="comment-content">Écrivez votre commentaire</label>
+		{{ form_widget(form.contenuCommentaire, {'attr': {'class': 'create__textarea-head'}}) }}
+		<div style="color: red;font-size: 14px;">
+			{{ form_errors(form.contenuCommentaire) }}
+		</div>
+	</div>
+	<label for="comment-content">Pièce Jointe</label>
+	{{ form_widget(form.piecejointe, {'attr': {'class': 'form-control-file'}}) }}
+	{% if form.piecejointe.vars.errors|length > 0 %}
+		<div class="invalid-feedback">
+			{{ form_errors(form.piecejointe) }}
+		</div>
+	{% endif %}
+	<div class="create__footer">
+		<button class="create__btn-cansel btn" style="background-color: #3366cc; color: #fff;">{{ button_label|default('Valider') }}</button>
+		<a href="{{ path('app_sujet_index') }}" class="create__btn-cancel btn" style="background-color: #ccc; color: #333;">Annuler</a>
+	</div>{{ form_end(form) }}

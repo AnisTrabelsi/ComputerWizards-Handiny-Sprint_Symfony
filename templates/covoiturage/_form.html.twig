@@ -1,0 +1,22 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}, 'class': 'form-horizontal' } ) }}
+    {% for field in form %}
+    {% if field.vars.name != '_token' %}
+        <div class="form-group">
+            {{ form_label(field, null, { 'label_attr': {'class': 'col-sm-3 control-label'} }) }}
+            <div class="col-sm-9">
+                {% if field.vars.name == 'date_covoiturage' %}
+                    {{ form_widget(field, { 'attr': {'class': 'form-control datepicker'} }) }}
+                {% else %}
+                    {{ form_widget(field, { 'attr': {'class': 'form-control'} }) }}
+                {% endif %}
+                {{ form_errors(field) }}
+            </div>
+        </div>
+           {% endif %}
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-primary">{{ button_label|default('ajouter') }}</button>
+        </div>
+    </div>
+{{ form_end(form) }}

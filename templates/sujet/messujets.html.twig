@@ -1,0 +1,179 @@
+{% extends 'baseF.html.twig' %}
+{% block title %}
+	Liste de sujets
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+{% block body %}
+	<div class="site__body">
+		<div class="block-header block-header--has-breadcrumb block-header--has-title">
+			<div class="container">
+				<div class="block-header__body">
+					<nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+						<ol class="breadcrumb__list">
+							<li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+							<li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+								<a href={{ path('app_sujet_index') }} class="breadcrumb__item-link">Accueil</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--parent">
+								<a href={{ path('app_sujet_messujets') }} class="breadcrumb__item-link">Mes sujets</a>
+							</li>
+							<li class="breadcrumb__title-safe-area" role="presentation"></li>
+						</ol>
+					</nav>
+					<h1 class="block-header__title">Mes sujets</h1>
+					<div class="search-bar">
+						<form action="{{ path('app_sujet_search2') }}" method="get">
+							<div class="search-container">
+								<input type="text" name="search" placeholder="Recherche...">
+								<button type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+					<style>
+						.search-bar {
+							display: flex;
+							justify-content: center;
+							margin: 20px 0;
+						}
+
+						.search-container {
+							display: flex;
+							position: relative;
+							width: 400px;
+							height: 40px;
+							background-color: #fff;
+							border-radius: 20px;
+							overflow: hidden;
+							border: 2px solid #ccc;
+						}
+
+						.search-container input[type="text"] {
+							width: 100%;
+							height: 100%;
+							padding: 10px 20px;
+							font-size: 16px;
+							border: none;
+							outline: none;
+						}
+
+						.search-container button {
+							position: absolute;
+							top: 0;
+							right: 0;
+							height: 100%;
+							width: 60px;
+							background-color: #5f38f9;
+							color: #fff;
+							border: none;
+							border-radius: 0 20px 20px 0;
+							cursor: pointer;
+						}
+
+						.search-container button i {
+							font-size: 20px;
+							padding: 10px;
+						}
+
+						.search-container button:hover {
+							background-color: #286090;
+						}
+					</style>
+				</div>
+			</div>
+		</div>
+		<div class="block blog-view blog-view--layout--list">
+			<div class="container">
+				<div class="blog-view__body">
+					<div class="blog-view__item blog-view__item-posts">
+						<div class="block posts-view">
+							<div class="posts-view__list posts-list posts-list--layout--list">
+								<div class="posts-list__body">
+									{% if sujets is empty %}
+										<div class="warning-message">
+											<span class="warning-icon">&#9888;</span>
+											Aucun résultat trouvé pour votre recherche. Veuillez réessayer avec des termes différents.
+										</div>
+									{% else %}
+										{% for sujet in sujets %}
+											{% if loop.index % 3 == 1 %}
+												<div class="row">
+												{% endif %}
+												<div class="posts-list__item">
+													<div class="post-card post-card--layout--list">
+														<div class="post-card__image">
+															<a href="post-full-width.html">
+																{% if sujet.categorie.nomCategorie == "Infrastructure" %}
+																	<img src="{{asset('front/images/categories/infra.jpg')}}" alt="Infrastructure image" style="width: 300px; height: 200px;">
+																{% elseif sujet.categorie.nomCategorie == "Dons" %}
+																	<img src="{{asset('front/images/categories/don.png')}}" alt="Don image" style="width: 300px; height: 200px;">
+																{% elseif sujet.categorie.nomCategorie == "Recrutement" %}
+																	<img src="{{asset('front/images/rec.jpg')}}" alt="Rec image" style="width: 300px; height: 200px;">
+
+																{% else %}
+																	<img src="{{asset('front/images/categories/new.jpg')}}" alt="Default image" style="width: 300px; height: 200px;">
+																{% endif %}
+															</a>
+														</div>
+														<div class="post-card__content">
+															<div class="post-card__category">
+																<a href="blog-classic-right-sidebar.html">{{ sujet.categorie }}</a>
+															</div>
+															<div class="post-card__title">
+																<h2>
+																	<a href="post-full-width.html">{{ sujet.titreSujet }}</a>
+																</h2>
+															</div>
+															<div class="post-card__date">
+																By
+																<a href="#">{{ sujet.user.nom }}</a>
+																on
+																{{ sujet.dateCreationSujet ? sujet.dateCreationSujet|date('Y-m-d') : '' }}
+															</div>
+															<div class="post-card__excerpt">
+																<div class="typography" style="width: 800px; height=100px;">{{ sujet.contenuSujet }}</div>
+															</div>
+															<div class="post-card__more">
+																<a href={{ path('app_sujet_show', {idSujet: sujet.idSujet} ) }} class="btn btn-secondary btn-sm">Afficher détails</a>
+																<a href="{{ path('app_sujet_edit', {'idSujet': sujet.idSujet}) }}" class="btn btn-secondary btn-sm">Modifier sujet</a>
+																{{ include('sujet/_delete_form.html.twig') }}
+															</div>
+														</div>
+													</div>
+												</div>
+												{% if loop.index % 3 == 0 or loop.last %}
+												</div>
+											{% endif %}
+										{% endfor %}
+									{% endif %}
+									<style>
+										.warning-message {
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											background-color: #fdd;
+											padding: 1rem;
+											border-radius: 5px;
+											font-size: 1.2rem;
+											color: #d33;
+										}
+
+										.warning-icon {
+											margin-right: 1rem;
+											font-size: 1.5rem;
+										}
+									</style>
+								</div>
+							</div>
+							{{ include('sujet/paginationmessujets.html.twig')}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-space block-space--layout--before-footer"></div>
+	</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'baseF.html.twig'%}
+
+{% block title %}Mes reservations {% endblock %}
+{% block stylesheets %}
+  {{ parent() }}
+    <style>
+        #search {
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          padding: 8px 12px;
+          font-size: 16px;
+          width: 100%;
+          margin-bottom: 16px;
+        }
+
+
+        #search:focus {
+          outline: none;
+          border-color: #6ea1ff;
+          box-shadow: 0 0 0 2px rgba(110, 161, 255, 0.3);
+        }
+        
+        .card {
+          border-radius: 10px;
+          transition: box-shadow 0.3s ease-in-out;
+            background-color: white;
+
+        }
+
+        .card:hover {
+          box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+            opacity: 0.8;
+
+        }
+    </style>
+{% endblock %}
+{% block body %}
+ <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+            <h1 class="text-center mt-4">Mes Reservations</h1>
+        </div>
+    </div>  {% block flash_messages %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+    <div class="row">
+        {% for reservation_covoiturage in reservation_covoiturages %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-car"  style="color: blue;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{ reservation_covoiturage.depart }} &nbsp;&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;&nbsp;  {{ reservation_covoiturage.destination }}</h5>
+
+                    {# <h5 class="card-title">{{ reservation_covoiturage.depart }} -> {{ reservation_covoiturage.destination }}</h5> #}
+                    <p class="card-text">Prix: {{ reservation_covoiturage.prixCovoiturage }} DT</p>
+                                        <p class="card-text">Nom du Conducteur: {{ reservation_covoiturage.nom }} </p>
+                    <p class="card-text">Telephone du conducteur : {{ reservation_covoiturage.Telephone }} </p>
+
+                    {{ include('reservation/_delete_form.html.twig') }}
+
+       
+
+                    {# <a href="{{ path('app_reservation_show', {'id': reservation_covoiturage.id}) }}">show</a> #}
+                    {# <a href="{{ path('app_reservation_edit', {'id': reservation_covoiturage.id}) }}">edit</a> #}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">
+                no records found
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {# <a href="{{ path('app_reservation_new') }}">Create new</a> #}
+{% endblock %}
+

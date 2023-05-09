@@ -1,0 +1,67 @@
+{% extends 'baseF.html.twig' %}
+
+{% block body %}
+
+	<!-- site__body -->
+			<div class="site__body">
+				<div class="block-space block-space--layout--after-header"></div>
+				<div class="block">
+					<div class="container container--max--xl">
+						<div class="row">
+							<div class="col-12 col-lg-3 d-flex">
+								<div class="account-nav flex-grow-1">
+									<h4 class="account-nav__title">Navigation</h4>
+									<ul class="account-nav__list">
+										<li class="account-nav__item">
+											<a href="account-dashboard.html">Mes Voitures</a>
+										</li>
+										<li class="account-nav__item">
+											<a href="account-garage.html">Mes réservations de voitures</a>
+										</li>
+										<li class="account-nav__item">
+											<a href="account-profile.html">Mes demandes de réservations </a>
+										</li>
+										<li class="account-nav__item account-nav__item">
+											<a href="account-orders.html">Mes réservations de voitures</a>
+										</li>
+										
+										<li class="account-nav__item">
+											<a href="account-addresses.html">Mon profil</a>
+										</li>
+										
+										<li class="account-nav__divider" role="presentation"></li>
+										<li class="account-nav__item">
+									<a href="{{path('app_logout')}}">Se déconnecter</a>
+								</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-12 col-lg-9 mt-4 mt-lg-0">
+								<div class="card">
+									<div class="card-header">
+										<h5>Modification de demande de Réservation</h5>
+									</div>
+									<div class="card-divider"></div>
+									<div class="card-body card-body--padding--2">
+										<div class="row no-gutters">
+											<div class="col-12 col-lg-7 col-xl-6">
+												
+												
+
+	{{ include('reservation_voiture/AjouterReservationVoiture.html.twig') }}
+
+	<a href="{{ path('app_Affichage_Reservations_Voitures_Locataire') }}">Liste de demandes</a>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block-space block-space--layout--before-footer"></div>
+			</div>
+			<!-- site__body / end -->
+	
+{% endblock %}

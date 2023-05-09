@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Réservation de voiture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F8F8F8;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #0066cc;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #444444;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Ajoutez d'autres styles CSS selon vos besoins */
+    </style>
+</head>
+<body>
+    <h1>Bonjour Monsieur/Madame {{ proprietaireVoiture.nom }},</h1>
+    <p>Votre voiture ayant l'immatriculation {{ immatriculationVoiture }} a été réservée auprès de Mr {{ nomLocataire }}.</p>
+
+
+    <!-- Autres éléments HTML et styles CSS selon vos besoins -->
+</body>
+</html>

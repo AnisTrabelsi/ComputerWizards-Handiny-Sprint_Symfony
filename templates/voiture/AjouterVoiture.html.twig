@@ -1,0 +1,207 @@
+<style>
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+    .form-grid label {
+        font-weight: bold;
+    }
+    .form-grid input,
+    .form-grid select {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    .form-grid input[type=submit] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    
+ .alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.alert .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .75rem 1.25rem;
+  color: inherit;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+
+
+</style>
+
+
+
+{{ form_start(formulaire_voiture, {'attr': {'class': '', 'novalidate': 'novalidate'}}) }}
+
+
+
+
+<table>
+<tr>
+<td>{{ form_label(formulaire_voiture.immatriculation) }}<td/>
+<td>{{ form_widget(formulaire_voiture.immatriculation) }}<td/>
+{% if form_errors(formulaire_voiture.immatriculation) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.immatriculation) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+
+</tr>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.marque) }}<td/>
+<td>{{ form_widget(formulaire_voiture.marque) }}<td/>
+{% if form_errors(formulaire_voiture.marque) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.marque) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+</tr>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.modele) }}<td/>
+<td>{{ form_widget(formulaire_voiture.modele) }}<td/>
+{% if form_errors(formulaire_voiture.modele) %}
+    <div class="alert alert-danger alert-dismissible alert-lg" role="alert">
+    {{ form_errors(formulaire_voiture.modele) }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endif %}
+</tr>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.boite_vitesse) }}<td/>
+<td>{{ form_widget(formulaire_voiture.boite_vitesse) }}<td/>
+{% if form_errors(formulaire_voiture.boite_vitesse) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.boite_vitesse) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+
+
+<tr/>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.kilometrage) }}<td/>
+<td>{{ form_widget(formulaire_voiture.kilometrage) }}<td/>
+{% if form_errors(formulaire_voiture.kilometrage) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.kilometrage) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+<tr/>
+
+<tr>
+   <td> {{ form_label(formulaire_voiture.carburant) }}<td/>
+   <td> {{ form_widget(formulaire_voiture.carburant) }}<td/>
+  {% if form_errors(formulaire_voiture.carburant) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.carburant) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %} 
+</tr>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.imageFile) }}<td/>
+<td>{{ form_widget(formulaire_voiture.imageFile) }}<td/>
+{% if form_errors(formulaire_voiture.imageFile) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.imageFile) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+</tr>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.prix_location) }}<td/>
+<td>{{ form_widget(formulaire_voiture.prix_location) }}<td/>
+{% if form_errors(formulaire_voiture.prix_location) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.prix_location) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+</tr>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.date_validation_technique) }}<td/>
+<td>{{ form_widget(formulaire_voiture.date_validation_technique) }}<td/>
+{% if form_errors(formulaire_voiture.date_validation_technique) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.date_validation_technique) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+</tr>
+
+<tr>
+<td>{{ form_label(formulaire_voiture.description) }}<td/>
+<td>{{ form_widget(formulaire_voiture.description) }}<td/>
+{% if form_errors(formulaire_voiture.description) %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ form_errors(formulaire_voiture.description) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+</tr>
+
+
+
+<tr>
+<td style="text-align: center;">
+
+    <button class="btn btn-lg btn-primary">{{ button_label|default('Enregistrer') }}</button>
+
+
+
+</td>
+								
+</tr>
+</table>
+
+{{ form_end(formulaire_voiture) }}
